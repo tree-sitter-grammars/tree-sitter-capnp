@@ -24,6 +24,22 @@ const primitives = [
   'Void',
 ];
 
+const annotation_targets = [
+  '*',
+  'annotation',
+  'const',
+  'enum',
+  'enumerant',
+  'field',
+  'file',
+  'group',
+  'interface',
+  'method',
+  'param',
+  'struct',
+  'union',
+];
+
 module.exports = grammar({
   name: 'capnp',
 
@@ -31,16 +47,21 @@ module.exports = grammar({
 
   word: ($) => $.identifier,
 
+  inline: ($) => [$._single_named_return_type],
+
   rules: {
-    message: ($) => seq(repeat($.comment), $.unique_id, ';', repeat($.statement)),
+    message: ($) => repeat($.statement),
 
     // @0x9eb32e19f86ee174;
     unique_id: () => token(seq('@', /0[xX][\da-fA-F](_?[\da-fA-F])*/)),
 
     statement: ($) =>
       choice(
+        seq($.unique_id, ';'),
         $.using_directive,
-        $.annotation_call,
+        $.import,
+        $.annotation,
+        $.lang_declaration,
         $.definition,
       ),
 
@@ -74,21 +95,110 @@ module.exports = grammar({
         ),
       ),
 
+    // $import "/capnp/c++.capnp".namespace("capnp");
+    import: ($) =>
+      seq(
+        '$import',
+        $.import_path,
+        '.namespace',
+        '(',
+        $.namespace,
+        ')',
+        ';',
+      ),
+    namespace: ($) => $.string_literal,
+
+    lang_declaration: ($) =>
+      seq(
+        '$',
+        $.lang_attrs,
+        ';',
+      ),
+
+    // $Cxx.namespace("capnp::compiler");
+    lang_attrs: ($) =>
+      seq(
+        token.immediate(/[A-Za-z_][A-Za-z0-9._]*/, $.identifier),
+        optional(
+          seq('(',
+            $.namespace,
+            ')',
+          ),
+        ),
+      ),
+
+    // annotation myAnnotation(struct) :Int32 $baz(10);
+    annotation: ($) =>
+      seq(
+        'annotation',
+        $.identifier,
+        optional($.unique_id),
+        '(',
+        list_seq($.annotation_target, ','),
+        ')',
+        optional(seq(':', $.field_type)),
+        optional($.annotation_call),
+        ';',
+      ),
+
+    annotation_target: () => choice(...annotation_targets),
+
+    // $Cxx.allowCancellation;
     annotation_call: ($) =>
       seq(
         '$',
         $.identifier,
-        repeat(seq('.', field('attribute', $.identifier))),
+        repeat(seq('.', alias($.identifier, $.attribute))),
+        optional(choice($.annotation_array, $.annotation_namespace_definition)),
+      ),
+
+    annotation_namespace_definition: ($) =>
+      seq(
         '(',
         $.string_literal,
         ')',
-        ';',
       ),
+
+    annotation_array: ($) =>
+      choice(
+        seq('[', $.annotation_array, ']'),
+        seq('(', $.annotation_array, ')'),
+        $.annotation_array_def,
+      ),
+
+    annotation_array_def: ($) =>
+      choice(
+        list_seq(
+          seq(
+            $.identifier,
+            '=',
+            $.annotation_value,
+          ),
+          ',',
+        ),
+        '()',
+      ),
+
+    annotation_value: ($) => $.string_literal,
+
+    // annotation_function_call: () =>
+    //   choice(
+    //     $.annotation_function_call_no_args,
+    //     $.annotation_function_call_args,
+    //   ),
+    //
+    // annotation_function_call_no_args: ($) => '()',
+    //
+    // annotation_function_call_args: ($) =>
+    // seq(
+    // ),
 
     definition: ($) =>
       choice(
         $.struct,
         $.enum,
+        $.const,
+        $.interface,
       ),
 
     struct: ($) =>
@@ -99,7 +209,7 @@ module.exports = grammar({
         optional($.unique_id),
         optional($.annotation_call),
         '{',
-        repeat($.struct_field),
+        repeat(choice($.field, $.using_directive)),
         '}',
       ),
     nested_struct: ($) => $.struct,
@@ -116,39 +226,142 @@ module.exports = grammar({
       ),
     nested_enum: ($) => $.enum,
 
-    struct_field: ($) =>
-      choice(
-        $.field,
-        $.nested_struct,
-        $.nested_enum,
-        $.union_field,
-      ),
-
     enum_field: ($) =>
       seq(
         $.identifier,
         seq('@', $.field_version),
+        optional($.annotation_call),
         ';',
       ),
 
-    union_field: ($) =>
+    group: ($) =>
       seq(
         $.identifier,
-        ':union',
+        // token(seq(':group', /[\s\f\uFEFF\u2060\u200B]|\\\r?\n/, '{')),
+        ':group',
+        repeat($.annotation_call),
         '{',
-        repeat($.primitive_field),
+        repeat($.field),
         '}',
       ),
 
+    // for struct/group
     field: ($) =>
+      choice(
+        // Base type
+        seq(
+          $.identifier,
+          seq('@', $.field_version),
+          ':',
+          $.field_type,
+          optional(seq('=', $.const_value)),
+          optional($.annotation_call),
+          ';',
+        ),
+
+        $.annotation,
+        $.nested_struct,
+        $.nested_enum,
+        $.const,
+        $.group,
+        $.union,
+      ),
+
+    union: ($) =>
+      seq(
+        choice(
+          seq(
+            $.identifier,
+            ':',
+            'union',
+            repeat($.annotation_call),
+            '{',
+          ),
+          token(/union\s*\{/),
+        ),
+        repeat($.union_field),
+        '}',
+      ),
+    nested_union: ($) => $.union,
+
+    union_field: ($) =>
+      choice(
+        // only difference with a field is it cannot have a default value..right?
+        seq(
+          $.identifier,
+          '@',
+          $.field_version,
+          ':',
+          $.field_type,
+          optional($.annotation_call),
+          ';',
+        ),
+
+        $.group,
+        $.nested_union,
+      ),
+
+    interface: ($) =>
+      seq(
+        'interface',
+        $.identifier,
+        optional($.unique_id),
+        optional(seq('(', $.generic_parameters, ')')),
+        optional(seq('extends', '(', $.identifier, ')')),
+        optional($.annotation_call),
+        '{',
+        repeat(choice($.method, $.interface, $.struct)),
+        '}',
+      ),
+
+    method: ($) =>
       seq(
         $.identifier,
         seq('@', $.field_version),
+        choice(
+          // method @0 (...)
+          seq('(', optional($.parameters), ')'),
+          // method @0 Foo
+          $.identifier,
+        ),
+        // (...) -> (...);
+        // (...) -> ();
+        // (...);
+        optional(seq('->', $.return_type)),
+        optional($.annotation_call),
+        ';',
+      ),
+
+    parameters: ($) => list_seq($.parameter, ','),
+
+    parameter: ($) =>
+      seq(
+        $.identifier,
         ':',
         $.field_type,
         optional(seq('=', $.const_value)),
-        ';',
       ),
+
+    return_type: ($) =>
+      choice(
+        seq(
+          '(',
+          $.named_return_type,
+          ')',
+        ),
+        $.unnamed_return_type,
+      ),
+
+    unnamed_return_type: ($) => $.identifier,
+
+    _single_named_return_type: ($) =>
+      seq(
+        $.identifier,
+        ':',
+        $.field_type,
+      ),
+
+    named_return_type: ($) => list_seq($._single_named_return_type, ','),
 
     primitive_field: ($) =>
       seq(
@@ -157,10 +370,11 @@ module.exports = grammar({
         ':',
         $.primitive_type,
         optional(seq('=', $.const_value)),
+        optional($.annotation_call),
         ';',
       ),
 
-    field_type: ($) => prec.left(choice($.primitive_type, $.container_type, $.group_type, $.identifier)),
+    field_type: ($) => prec.left(choice($.primitive_type, $.container_type, $.custom_type)),
 
     primitive_type: () => choice(...primitives),
 
@@ -170,16 +384,22 @@ module.exports = grammar({
       seq(
         'List',
         '(',
-        choice($.field_type, $.identifier),
+        // the types have an optional : due to the field_type here, list inner types don't have a :
+        $.field_type,
         ')',
       ),
 
-    group_type: ($) =>
+    custom_type: ($) => $.identifier,
+
+    const: ($) =>
       seq(
-        'group',
-        '{',
-        repeat($.primitive_field),
-        '}',
+        'const',
+        $.identifier,
+        ':',
+        $.field_type,
+        '=',
+        $.const_value,
+        ';',
       ),
 
     const_value: ($) =>
@@ -188,18 +408,17 @@ module.exports = grammar({
         $.float,
         $.boolean,
         $.string_literal,
-        $.identifier,
+        $.identifier, // TODO: parse as AnyTypeHere(...)
+        $.data,
         $.const_list,
         $.void,
       ),
 
-
     number: () => {
-      // const hex_literal = seq(
-      //   optional(choice('-', '+')),
-      //   choice('0x', '0X'), // Hex
-      //   /[\da-fA-F](_?[\da-fA-F])*/,
-      // );
+      const hex_literal = seq(
+        choice('0x', '0X'),
+        /[\da-fA-F](_?[\da-fA-F])*/,
+      );
 
       const decimal_digits = /\d(_?\d)*/;
       const signed_integer = seq(optional(choice('-', '+')), decimal_digits);
@@ -215,14 +434,20 @@ module.exports = grammar({
         signed_integer,
       );
 
-      return token(decimal_literal);
+      return token(choice(
+        hex_literal,
+        decimal_literal,
+      ));
     },
 
-    field_version: () => /\d(_?\d)*/,
+    field_version: () => /\d+/,
 
-    float: () => /[+-]?(\d+(\.\d+)?|\.\d+)/,
+    float: () => /[+-]?(\d+(\.\d+)?|\.\d+)([Ee][+-]?\d+)?/,
 
     boolean: () => choice('true', 'false'),
+
+    // 0x"62 61 72"; # "bar"
+    data: () => /0x"([0-9A-Fa-f]{2} ?)*"/,
 
     const_list: ($) =>
       seq('[', comma_sep1($.const_value), ']'),
