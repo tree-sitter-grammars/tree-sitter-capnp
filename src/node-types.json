@@ -1,12 +1,147 @@
 [
   {
-    "type": "source_file",
+    "type": "annotation_call",
+    "named": true,
+    "fields": {
+      "attribute": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "boolean",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "const_list",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "const_value",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "const_value",
     "named": true,
     "fields": {},
     "children": {
       "multiple": false,
       "required": true,
       "types": [
+        {
+          "type": "boolean",
+          "named": true
+        },
+        {
+          "type": "const_list",
+          "named": true
+        },
+        {
+          "type": "float",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "void",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "container_type",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "list_type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "definition",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "enum",
+          "named": true
+        },
+        {
+          "type": "struct",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "enum",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "annotation_call",
+          "named": true
+        },
+        {
+          "type": "enum_field",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
         {
           "type": "unique_id",
           "named": true
@@ -15,11 +150,559 @@
     }
   },
   {
+    "type": "enum_field",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "field_version",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "field",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "const_value",
+          "named": true
+        },
+        {
+          "type": "field_type",
+          "named": true
+        },
+        {
+          "type": "field_version",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "field_type",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "container_type",
+          "named": true
+        },
+        {
+          "type": "group_type",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "primitive_type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "generic_parameters",
+    "named": true,
+    "fields": {
+      "generic_parameter": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "group_type",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "primitive_field",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "import_path",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "string_literal",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "import_using",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "import_path",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "list_type",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "field_type",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "message",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "statement",
+          "named": true
+        },
+        {
+          "type": "unique_id",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "nested_enum",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "enum",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "nested_struct",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "struct",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "primitive_field",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "const_value",
+          "named": true
+        },
+        {
+          "type": "field_version",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "primitive_type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "primitive_type",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "replace_using",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "annotation_call",
+          "named": true
+        },
+        {
+          "type": "definition",
+          "named": true
+        },
+        {
+          "type": "using_directive",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "struct",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "annotation_call",
+          "named": true
+        },
+        {
+          "type": "generic_parameters",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "struct_field",
+          "named": true
+        },
+        {
+          "type": "unique_id",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "struct_field",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "field",
+          "named": true
+        },
+        {
+          "type": "nested_enum",
+          "named": true
+        },
+        {
+          "type": "nested_struct",
+          "named": true
+        },
+        {
+          "type": "union_field",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "union_field",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "primitive_field",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "using_directive",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "import_using",
+          "named": true
+        },
+        {
+          "type": "replace_using",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "$",
+    "named": false
+  },
+  {
+    "type": "(",
+    "named": false
+  },
+  {
+    "type": ")",
+    "named": false
+  },
+  {
+    "type": ",",
+    "named": false
+  },
+  {
+    "type": ".",
+    "named": false
+  },
+  {
+    "type": ":",
+    "named": false
+  },
+  {
+    "type": ":union",
+    "named": false
+  },
+  {
+    "type": ";",
+    "named": false
+  },
+  {
+    "type": "=",
+    "named": false
+  },
+  {
+    "type": "@",
+    "named": false
+  },
+  {
+    "type": "Bool",
+    "named": false
+  },
+  {
+    "type": "Data",
+    "named": false
+  },
+  {
+    "type": "Float32",
+    "named": false
+  },
+  {
+    "type": "Float64",
+    "named": false
+  },
+  {
+    "type": "Int16",
+    "named": false
+  },
+  {
+    "type": "Int32",
+    "named": false
+  },
+  {
+    "type": "Int64",
+    "named": false
+  },
+  {
+    "type": "Int8",
+    "named": false
+  },
+  {
+    "type": "List",
+    "named": false
+  },
+  {
+    "type": "Text",
+    "named": false
+  },
+  {
+    "type": "UInt16",
+    "named": false
+  },
+  {
+    "type": "UInt32",
+    "named": false
+  },
+  {
+    "type": "UInt64",
+    "named": false
+  },
+  {
+    "type": "UInt8",
+    "named": false
+  },
+  {
+    "type": "Void",
+    "named": false
+  },
+  {
+    "type": "[",
+    "named": false
+  },
+  {
+    "type": "]",
+    "named": false
+  },
+  {
     "type": "comment",
     "named": true
   },
   {
+    "type": "enum",
+    "named": false
+  },
+  {
+    "type": "false",
+    "named": false
+  },
+  {
+    "type": "field_version",
+    "named": true
+  },
+  {
+    "type": "float",
+    "named": true
+  },
+  {
+    "type": "group",
+    "named": false
+  },
+  {
+    "type": "identifier",
+    "named": true
+  },
+  {
+    "type": "import",
+    "named": false
+  },
+  {
+    "type": "number",
+    "named": true
+  },
+  {
+    "type": "string_literal",
+    "named": true
+  },
+  {
+    "type": "struct",
+    "named": false
+  },
+  {
+    "type": "true",
+    "named": false
+  },
+  {
     "type": "unique_id",
     "named": true
+  },
+  {
+    "type": "using",
+    "named": false
+  },
+  {
+    "type": "void",
+    "named": true
+  },
+  {
+    "type": "{",
+    "named": false
+  },
+  {
+    "type": "}",
+    "named": false
   }
 ]
