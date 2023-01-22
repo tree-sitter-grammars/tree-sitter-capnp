@@ -34,26 +34,24 @@ struct Person {
 ---
 
 (message
-      (unique_id)
+      (statement
+        (unique_id))
       (statement
         (definition
           (struct
-            (identifier)
-            (struct_field
-              (field
-                (identifier)
-                (field_version)
-                (field_type
-                  (primitive_type))))
-            (struct_field
-              (field
-                (identifier)
-                (field_version)
-                (field_type
-                  (primitive_type))))
-            (struct_field
-              (field
-                (identifier)
-                (field_version)
-                (field_type
-                  (primitive_type))))))))
+            (type_identifier)
+            (field
+              (field_identifier)
+              (field_version)
+              (field_type
+                (primitive_type)))
+            (field
+              (field_identifier)
+              (field_version)
+              (field_type
+                (primitive_type)))
+            (field
+              (field_identifier)
+              (field_version)
+              (field_type
+                (primitive_type)))))))
