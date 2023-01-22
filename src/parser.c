@@ -9,7 +9,7 @@
 #define STATE_COUNT 763
 #define LARGE_STATE_COUNT 2
 #define SYMBOL_COUNT 128
-#define ALIAS_COUNT 16
+#define ALIAS_COUNT 17
 #define TOKEN_COUNT 65
 #define EXTERNAL_TOKEN_COUNT 0
 #define FIELD_COUNT 0
@@ -159,7 +159,8 @@ enum {
   alias_sym_property = 140,
   alias_sym_return_identifier = 141,
   alias_sym_string_concatenation = 142,
-  alias_sym_type_identifier = 143,
+  alias_sym_type_definition = 143,
+  alias_sym_type_identifier = 144,
 };
 
 static const char * const ts_symbol_names[] = {
@@ -306,6 +307,7 @@ static const char * const ts_symbol_names[] = {
   [alias_sym_property] = "property",
   [alias_sym_return_identifier] = "return_identifier",
   [alias_sym_string_concatenation] = "string_concatenation",
+  [alias_sym_type_definition] = "type_definition",
   [alias_sym_type_identifier] = "type_identifier",
 };
 
@@ -453,6 +455,7 @@ static const TSSymbol ts_symbol_map[] = {
   [alias_sym_property] = alias_sym_property,
   [alias_sym_return_identifier] = alias_sym_return_identifier,
   [alias_sym_string_concatenation] = alias_sym_string_concatenation,
+  [alias_sym_type_definition] = alias_sym_type_definition,
   [alias_sym_type_identifier] = alias_sym_type_identifier,
 };
 
@@ -1029,6 +1032,10 @@ static const TSSymbolMetadata ts_symbol_metadata[] = {
     .visible = true,
     .named = true,
   },
+  [alias_sym_type_definition] = {
+    .visible = true,
+    .named = true,
+  },
   [alias_sym_type_identifier] = {
     .visible = true,
     .named = true,
@@ -1047,7 +1054,7 @@ static const TSSymbol ts_alias_sequences[PRODUCTION_ID_COUNT][MAX_ALIAS_SEQUENCE
     [0] = alias_sym_generic_identifier,
   },
   [4] = {
-    [0] = alias_sym_type_identifier,
+    [0] = alias_sym_type_definition,
     [2] = alias_sym_type_identifier,
   },
   [5] = {

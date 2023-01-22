@@ -98,7 +98,7 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "_type_identifier"
+          "name": "_type_definition"
         },
         {
           "type": "STRING",
@@ -2094,6 +2094,15 @@
       "named": true,
       "value": "return_identifier"
     },
+    "_type_definition": {
+      "type": "ALIAS",
+      "content": {
+        "type": "SYMBOL",
+        "name": "identifier"
+      },
+      "named": true,
+      "value": "type_definition"
+    },
     "_type_identifier": {
       "type": "ALIAS",
       "content": {
@@ -2164,6 +2173,7 @@
     "_generic_identifier",
     "_param_identifier",
     "_return_identifier",
+    "_type_definition",
     "_type_identifier",
     "_extend_type",
     "_property",

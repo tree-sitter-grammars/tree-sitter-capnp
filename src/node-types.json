@@ -746,6 +746,10 @@
       "required": true,
       "types": [
         {
+          "type": "type_definition",
+          "named": true
+        },
+        {
           "type": "type_identifier",
           "named": true
         }
@@ -1237,6 +1241,10 @@
   },
   {
     "type": "true",
+    "named": true
+  },
+  {
+    "type": "type_definition",
     "named": true
   },
   {
