@@ -25,6 +25,14 @@
   "union"
 ] @type.builtin
 
+; Typedefs
+
+(type_definition) @type.definition
+
+; Labels (@number, @number!)
+
+(field_version) @label
+
 ; Methods
 
 (method_identifier) @method
@@ -70,10 +78,7 @@
 ; Keywords
 
 [
-  "const"
   "extends"
-  "import"
-  "$import"
   "namespace"
   "using"
 ] @keyword

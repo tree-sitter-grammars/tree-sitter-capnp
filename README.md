@@ -1,4 +1,4 @@
-# tree-sitter-thrift
+# tree-sitter-capnp
 
 Cap'n Proto grammar for [tree-sitter](https://github.com/tree-sitter/tree-sitter)
 

@@ -62,6 +62,7 @@ module.exports = grammar({
     $._generic_identifier,
     $._param_identifier,
     $._return_identifier,
+    $._type_definition,
     $._type_identifier,
     $._extend_type,
 
@@ -100,7 +101,7 @@ module.exports = grammar({
     // using T = Foo.Bar;
     replace_using: ($) =>
       seq(
-        $._type_identifier,
+        $._type_definition,
         '=',
         $._type_identifier,
       ),
@@ -505,6 +506,7 @@ module.exports = grammar({
     _method_identifier: ($) => alias($.identifier, $.method_identifier),
     _param_identifier: ($) => alias($.identifier, $.param_identifier),
     _return_identifier: ($) => alias($.identifier, $.return_identifier),
+    _type_definition: ($) => alias($.identifier, $.type_definition),
     _type_identifier: ($) => alias($.identifier, $.type_identifier),
     _extend_type: ($) => alias($.identifier, $.extend_type),
 
