@@ -24,20 +24,24 @@ const primitives = [
   'Void',
 ];
 
+const builtin_types = [
+  'annotation',
+  'enum',
+  'group',
+  'interface',
+  'struct',
+  'union',
+];
+
 const annotation_targets = [
   '*',
-  'annotation',
   'const',
-  'enum',
   'enumerant',
   'field',
   'file',
-  'group',
-  'interface',
   'method',
   'param',
-  'struct',
-  'union',
+  ...builtin_types,
 ];
 
 module.exports = grammar({
@@ -47,7 +51,29 @@ module.exports = grammar({
 
   word: ($) => $.identifier,
 
-  inline: ($) => [$._single_named_return_type],
+  inline: ($) => [
+    $._single_named_return_type,
+
+    $._annotation_identifier,
+    $._const_identifier,
+    $._enum_identifier,
+    $._enum_member,
+    $._field_identifier,
+    $._generic_identifier,
+    $._param_identifier,
+    $._return_identifier,
+    $._type_identifier,
+    $._extend_type,
+
+    $._property,
+
+    $._string_literal,
+    $._multi_string_literal,
+    $._namespace,
+    $._import_path,
+
+    $._annotation_call,
+  ],
 
   rules: {
     message: ($) => repeat($.statement),
@@ -68,30 +94,30 @@ module.exports = grammar({
     using_directive: ($) =>
       seq(
         'using',
-        choice($.identifier, $.replace_using, $.import_using),
+        choice($._type_identifier, $.replace_using, $.import_using),
         ';',
       ),
     // using T = Foo.Bar;
     replace_using: ($) =>
       seq(
-        $.identifier,
+        $._type_identifier,
         '=',
-        $.identifier,
+        $._type_identifier,
       ),
     import_using: ($) =>
       choice(
         // using import "bar.capnp".Baz;
         seq(
           'import',
-          $.import_path,
-          optional(repeat(seq('.', $.identifier))),
+          $._import_path,
+          optional(repeat(seq('.', $._type_identifier))),
         ),
         // using Bar = import "bar.capnp";
         seq(
-          $.identifier,
+          $._type_identifier,
           '=',
           'import',
-          $.import_path,
+          $._import_path,
         ),
       ),
 
@@ -99,14 +125,15 @@ module.exports = grammar({
     import: ($) =>
       seq(
         '$import',
-        $.import_path,
-        '.namespace',
+        $._import_path,
+        '.',
+        'namespace',
         '(',
-        $.namespace,
+        $._namespace,
         ')',
         ';',
       ),
-    namespace: ($) => $.string_literal,
+    _namespace: ($) => alias($._string_literal, $.namespace),
 
     lang_declaration: ($) =>
       seq(
@@ -118,10 +145,10 @@ module.exports = grammar({
     // $Cxx.namespace("capnp::compiler");
     lang_attrs: ($) =>
       seq(
-        token.immediate(/[A-Za-z_][A-Za-z0-9._]*/, $.identifier),
+        token.immediate(/[A-Za-z_][A-Za-z0-9._]*/, $._type_identifier),
         optional(
           seq('(',
-            $.namespace,
+            $._namespace,
             ')',
           ),
         ),
@@ -131,31 +158,33 @@ module.exports = grammar({
     annotation: ($) =>
       seq(
         'annotation',
-        $.identifier,
+        $._annotation_identifier,
         optional($.unique_id),
         '(',
         list_seq($.annotation_target, ','),
         ')',
         optional(seq(':', $.field_type)),
-        optional($.annotation_call),
+        optional($._annotation_call),
         ';',
       ),
 
     annotation_target: () => choice(...annotation_targets),
 
     // $Cxx.allowCancellation;
-    annotation_call: ($) =>
+    _annotation_call: ($) =>
       seq(
         '$',
-        $.identifier,
-        repeat(seq('.', alias($.identifier, $.attribute))),
-        optional(choice($.annotation_array, $.annotation_namespace_definition)),
+        alias(
+          seq($._annotation_identifier,
+            repeat(seq('.', alias($.identifier, $.attribute))),
+            optional(choice($.annotation_array, $.annotation_namespace_definition))),
+          $.annotation_call),
       ),
 
     annotation_namespace_definition: ($) =>
       seq(
         '(',
-        $.string_literal,
+        $._string_literal,
         ')',
       ),
 
@@ -163,14 +192,14 @@ module.exports = grammar({
       choice(
         seq('[', $.annotation_array, ']'),
         seq('(', $.annotation_array, ')'),
-        $.annotation_array_def,
+        $._annotation_array_def,
       ),
 
-    annotation_array_def: ($) =>
+    _annotation_array_def: ($) =>
       choice(
         list_seq(
           seq(
-            $.identifier,
+            $._field_identifier,
             '=',
             $.annotation_value,
           ),
@@ -179,19 +208,7 @@ module.exports = grammar({
         '()',
       ),
 
-    annotation_value: ($) => $.string_literal,
-
-    // annotation_function_call: () =>
-    //   choice(
-    //     $.annotation_function_call_no_args,
-    //     $.annotation_function_call_args,
-    //   ),
-    //
-    // annotation_function_call_no_args: ($) => '()',
-    //
-    // annotation_function_call_args: ($) =>
-    // seq(
-    // ),
+    annotation_value: ($) => $._string_literal,
 
     definition: ($) =>
       choice(
@@ -204,10 +221,10 @@ module.exports = grammar({
     struct: ($) =>
       seq(
         'struct',
-        $.identifier,
+        $._type_identifier,
         optional($.generic_parameters),
         optional($.unique_id),
-        optional($.annotation_call),
+        optional($._annotation_call),
         '{',
         repeat(choice($.field, $.using_directive)),
         '}',
@@ -217,9 +234,9 @@ module.exports = grammar({
     enum: ($) =>
       seq(
         'enum',
-        $.identifier,
+        $._enum_identifier,
         optional($.unique_id),
-        optional($.annotation_call),
+        optional($._annotation_call),
         '{',
         repeat($.enum_field),
         '}',
@@ -228,18 +245,17 @@ module.exports = grammar({
 
     enum_field: ($) =>
       seq(
-        $.identifier,
-        seq('@', $.field_version),
-        optional($.annotation_call),
+        $._enum_member,
+        $.field_version,
+        optional($._annotation_call),
         ';',
       ),
 
     group: ($) =>
       seq(
-        $.identifier,
-        // token(seq(':group', /[\s\f\uFEFF\u2060\u200B]|\\\r?\n/, '{')),
+        $._type_identifier,
         ':group',
-        repeat($.annotation_call),
+        repeat($._annotation_call),
         '{',
         repeat($.field),
         '}',
@@ -250,12 +266,12 @@ module.exports = grammar({
       choice(
         // Base type
         seq(
-          $.identifier,
-          seq('@', $.field_version),
+          $._field_identifier,
+          $.field_version,
           ':',
           $.field_type,
           optional(seq('=', $.const_value)),
-          optional($.annotation_call),
+          optional($._annotation_call),
           ';',
         ),
 
@@ -271,10 +287,11 @@ module.exports = grammar({
       seq(
         choice(
           seq(
-            $.identifier,
+            $._type_identifier,
+            $.field_version,
             ':',
             'union',
-            repeat($.annotation_call),
+            repeat($._annotation_call),
             '{',
           ),
           token(/union\s*\{/),
@@ -288,12 +305,11 @@ module.exports = grammar({
       choice(
         // only difference with a field is it cannot have a default value..right?
         seq(
-          $.identifier,
-          '@',
+          $._field_identifier,
           $.field_version,
           ':',
           $.field_type,
-          optional($.annotation_call),
+          optional($._annotation_call),
           ';',
         ),
 
@@ -304,31 +320,31 @@ module.exports = grammar({
     interface: ($) =>
       seq(
         'interface',
-        $.identifier,
+        $._type_identifier,
         optional($.unique_id),
         optional(seq('(', $.generic_parameters, ')')),
-        optional(seq('extends', '(', $.identifier, ')')),
-        optional($.annotation_call),
+        optional(seq('extends', '(', $.extend_type, ')')),
+        optional($._annotation_call),
         '{',
-        repeat(choice($.method, $.interface, $.struct)),
+        repeat(choice($.method, $.interface, $.struct, $.enum)),
         '}',
       ),
 
     method: ($) =>
       seq(
-        $.identifier,
-        seq('@', $.field_version),
+        $._method_identifier,
+        $.field_version,
         choice(
           // method @0 (...)
           seq('(', optional($.parameters), ')'),
           // method @0 Foo
-          $.identifier,
+          $._type_identifier,
         ),
         // (...) -> (...);
         // (...) -> ();
         // (...);
         optional(seq('->', $.return_type)),
-        optional($.annotation_call),
+        optional($._annotation_call),
         ';',
       ),
 
@@ -336,7 +352,7 @@ module.exports = grammar({
 
     parameter: ($) =>
       seq(
-        $.identifier,
+        $._param_identifier,
         ':',
         $.field_type,
         optional(seq('=', $.const_value)),
@@ -352,33 +368,20 @@ module.exports = grammar({
         $.unnamed_return_type,
       ),
 
-    unnamed_return_type: ($) => $.identifier,
+    unnamed_return_type: ($) => $._type_identifier,
 
     _single_named_return_type: ($) =>
       seq(
-        $.identifier,
+        $._return_identifier,
         ':',
-        $.field_type,
+        $._type_identifier, // type
       ),
 
     named_return_type: ($) => list_seq($._single_named_return_type, ','),
 
-    primitive_field: ($) =>
-      seq(
-        $.identifier,
-        seq('@', $.field_version),
-        ':',
-        $.primitive_type,
-        optional(seq('=', $.const_value)),
-        optional($.annotation_call),
-        ';',
-      ),
-
-    field_type: ($) => prec.left(choice($.primitive_type, $.container_type, $.custom_type)),
+    field_type: ($) => choice($.primitive_type, $.list_type, $.custom_type),
 
     primitive_type: () => choice(...primitives),
-
-    container_type: ($) => $.list_type,
 
     list_type: ($) =>
       seq(
@@ -394,7 +397,7 @@ module.exports = grammar({
     const: ($) =>
       seq(
         'const',
-        $.identifier,
+        $._const_identifier,
         ':',
         $.field_type,
         '=',
@@ -407,8 +410,10 @@ module.exports = grammar({
         $.number,
         $.float,
         $.boolean,
-        $.string_literal,
-        $.identifier, // TODO: parse as AnyTypeHere(...)
+        $._string_literal,
+        $._multi_string_literal,
+        $.struct_shorthand,
+        $.identifier,
         $.data,
         $.const_list,
         $.void,
@@ -416,9 +421,13 @@ module.exports = grammar({
 
     number: () => {
       const hex_literal = seq(
+        optional('-'),
         choice('0x', '0X'),
         /[\da-fA-F](_?[\da-fA-F])*/,
       );
+
+      // inf, -inf, nan
+      const special_literal = choice(seq(optional('-'), 'inf'), 'nan');
 
       const decimal_digits = /\d(_?\d)*/;
       const signed_integer = seq(optional(choice('-', '+')), decimal_digits);
@@ -437,30 +446,69 @@ module.exports = grammar({
       return token(choice(
         hex_literal,
         decimal_literal,
+        special_literal,
       ));
     },
 
-    field_version: () => /\d+/,
+    field_version: ($) => choice($._normal_version, $._inline_version),
+
+    // normal is just @ followed by a number
+    _normal_version: () => token(seq('@', /\d+/)),
+
+    // inline is @ followed by a number then a !
+    _inline_version: ($) => alias(token(seq('@', /\d+/, '!')), $.inline_field),
 
     float: () => /[+-]?(\d+(\.\d+)?|\.\d+)([Ee][+-]?\d+)?/,
 
-    boolean: () => choice('true', 'false'),
+    boolean: ($) => choice($.true, $.false),
+    true: () => 'true',
+    false: () => 'false',
 
     // 0x"62 61 72"; # "bar"
-    data: () => /0x"([0-9A-Fa-f]{2} ?)*"/,
+    // data can be spaced or not?
+    data: ($) => seq('0x', alias(/"([0-9A-Fa-f]{2} ?)*"/, $.data_string)),
 
     const_list: ($) =>
       seq('[', comma_sep1($.const_value), ']'),
 
     void: () => 'void',
 
-    generic_parameters: ($) => comma_sep1(field('generic_parameter', $.identifier)),
+    struct_shorthand: ($) => seq('(', repeat(seq($._property, '=', $.const_value, optional(','))), ')'),
 
-    string_literal: () => /"([^"\\]|\\.)*"|'([^'\\]|\\.)*'/,
+    generic_parameters: ($) => comma_sep1($._generic_identifier),
 
-    import_path: ($) => $.string_literal,
+    _string_literal: ($) => alias(/"([^"\\]|\\.)*"|'([^'\\]|\\.)*'/, $.string_literal),
+
+    // multiple string literals only separated by whitespace, effectively a string concatenation
+    _multi_string_literal: ($) =>
+      alias(
+        seq(
+          $._string_literal,
+          repeat1(seq(
+            /\s+/,
+            $._string_literal,
+          )),
+        ),
+        $.string_concatenation,
+      ),
+
+    _import_path: ($) => alias($._string_literal, $.import_path),
 
     identifier: () => /[A-Za-z_][A-Za-z0-9._]*/,
+
+    _annotation_identifier: ($) => alias($.identifier, $.annotation_identifier),
+    _const_identifier: ($) => alias($.identifier, $.const_identifier),
+    _enum_identifier: ($) => alias($.identifier, $.enum_identifier),
+    _enum_member: ($) => alias($.identifier, $.enum_member),
+    _field_identifier: ($) => alias($.identifier, $.field_identifier),
+    _generic_identifier: ($) => alias($.identifier, $.generic_identifier),
+    _method_identifier: ($) => alias($.identifier, $.method_identifier),
+    _param_identifier: ($) => alias($.identifier, $.param_identifier),
+    _return_identifier: ($) => alias($.identifier, $.return_identifier),
+    _type_identifier: ($) => alias($.identifier, $.type_identifier),
+    _extend_type: ($) => alias($.identifier, $.extend_type),
+
+    _property: ($) => alias($.identifier, $.property),
 
     comment: () => token(repeat1(seq('#', /.*/))),
   },
