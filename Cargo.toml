@@ -2,19 +2,15 @@
 name = "tree-sitter-capnp"
 description = "capnp grammar for the tree-sitter parsing library"
 version = "0.0.1"
+authors = ["amaanq (Amaan Qureshi) <amaanq12@gmail.com>"]
 keywords = ["incremental", "parsing", "capnp"]
 categories = ["parsing", "text-editors"]
 repository = "https://github.com/tree-sitter/tree-sitter-capnp"
-edition = "2018"
+edition = "2021"
 license = "MIT"
 
 build = "bindings/rust/build.rs"
-include = [
-  "bindings/rust/*",
-  "grammar.js",
-  "queries/*",
-  "src/*",
-]
+include = ["bindings/rust/*", "grammar.js", "queries/*", "src/*"]
 
 [lib]
 path = "bindings/rust/lib.rs"
