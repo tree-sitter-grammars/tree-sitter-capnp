@@ -1097,7 +1097,7 @@
                 },
                 {
                   "type": "SYMBOL",
-                  "name": "identifier"
+                  "name": "_extend_type"
                 },
                 {
                   "type": "STRING",
@@ -2103,6 +2103,15 @@
       "named": true,
       "value": "type_identifier"
     },
+    "_extend_type": {
+      "type": "ALIAS",
+      "content": {
+        "type": "SYMBOL",
+        "name": "identifier"
+      },
+      "named": true,
+      "value": "extend_type"
+    },
     "_property": {
       "type": "ALIAS",
       "content": {
@@ -2156,6 +2165,7 @@
     "_param_identifier",
     "_return_identifier",
     "_type_identifier",
+    "_extend_type",
     "_property",
     "_string_literal",
     "_multi_string_literal",

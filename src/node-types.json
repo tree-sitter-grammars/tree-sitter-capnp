@@ -505,11 +505,11 @@
           "named": true
         },
         {
-          "type": "generic_parameters",
+          "type": "extend_type",
           "named": true
         },
         {
-          "type": "identifier",
+          "type": "generic_parameters",
           "named": true
         },
         {
@@ -1142,6 +1142,10 @@
   {
     "type": "enumerant",
     "named": false
+  },
+  {
+    "type": "extend_type",
+    "named": true
   },
   {
     "type": "extends",

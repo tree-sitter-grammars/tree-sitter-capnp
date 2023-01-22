@@ -323,7 +323,7 @@ module.exports = grammar({
         $._type_identifier,
         optional($.unique_id),
         optional(seq('(', $.generic_parameters, ')')),
-        optional(seq('extends', '(', $.extend_type, ')')),
+        optional(seq('extends', '(', $._extend_type, ')')),
         optional($._annotation_call),
         '{',
         repeat(choice($.method, $.interface, $.struct, $.enum)),
