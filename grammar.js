@@ -69,7 +69,6 @@ module.exports = grammar({
     $._property,
 
     $._string_literal,
-    $._multi_string_literal,
     $._namespace,
     $._import_path,
 
@@ -412,7 +411,7 @@ module.exports = grammar({
         $.float,
         $.boolean,
         $._string_literal,
-        $._multi_string_literal,
+        $.multi_string_literal,
         $.struct_shorthand,
         $.identifier,
         $.data,
@@ -481,7 +480,7 @@ module.exports = grammar({
     _string_literal: ($) => alias(/"([^"\\]|\\.)*"|'([^'\\]|\\.)*'/, $.string_literal),
 
     // multiple string literals only separated by whitespace, effectively a string concatenation
-    _multi_string_literal: ($) =>
+    multi_string_literal: ($) =>
       alias(
         seq(
           $._string_literal,
