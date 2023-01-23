@@ -36,6 +36,7 @@
 
 ; Methods
 
+(annotation_definition_identifier) @method
 (method_identifier) @method
 
 ; Fields
@@ -71,8 +72,8 @@
 
 ; Attributes
 
-(attribute) @attribute
 (annotation_identifier) @attribute
+(attribute) @attribute
 
 ; Operators
 
@@ -87,6 +88,8 @@
   "extends"
   "namespace"
   "using"
+  (void)
+  (annotation_target)
 ] @keyword
 
 ; Literals
@@ -125,6 +128,8 @@
   ";"
   "->"
 ] @punctuation.delimiter
+
+(data_hex) @symbol
 
 ; Comments
 
