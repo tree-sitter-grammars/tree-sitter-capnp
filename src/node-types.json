@@ -8,14 +8,6 @@
         "required": false,
         "types": [
           {
-            "type": "(",
-            "named": false
-          },
-          {
-            "type": ")",
-            "named": false
-          },
-          {
             "type": ".",
             "named": false
           },
@@ -36,7 +28,7 @@
             "named": true
           },
           {
-            "type": "generic_parameters",
+            "type": "generics",
             "named": true
           }
         ]
@@ -51,7 +43,7 @@
           "named": true
         },
         {
-          "type": "annotation_target",
+          "type": "annotation_targets",
           "named": true
         },
         {
@@ -107,6 +99,21 @@
     "type": "annotation_target",
     "named": true,
     "fields": {}
+  },
+  {
+    "type": "annotation_targets",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "annotation_target",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "annotation_value",
@@ -252,7 +259,7 @@
       "required": true,
       "types": [
         {
-          "type": "generic_parameters",
+          "type": "generics",
           "named": true
         },
         {
@@ -336,14 +343,6 @@
         "required": false,
         "types": [
           {
-            "type": "(",
-            "named": false
-          },
-          {
-            "type": ")",
-            "named": false
-          },
-          {
             "type": ".",
             "named": false
           },
@@ -364,7 +363,7 @@
             "named": true
           },
           {
-            "type": "generic_parameters",
+            "type": "generics",
             "named": true
           }
         ]
@@ -398,14 +397,6 @@
         "required": false,
         "types": [
           {
-            "type": "(",
-            "named": false
-          },
-          {
-            "type": ")",
-            "named": false
-          },
-          {
             "type": ".",
             "named": false
           },
@@ -426,7 +417,7 @@
             "named": true
           },
           {
-            "type": "generic_parameters",
+            "type": "generics",
             "named": true
           }
         ]
@@ -456,14 +447,6 @@
         "required": false,
         "types": [
           {
-            "type": "(",
-            "named": false
-          },
-          {
-            "type": ")",
-            "named": false
-          },
-          {
             "type": ".",
             "named": false
           },
@@ -484,7 +467,7 @@
             "named": true
           },
           {
-            "type": "generic_parameters",
+            "type": "generics",
             "named": true
           }
         ]
@@ -603,12 +586,12 @@
     }
   },
   {
-    "type": "generic_parameters",
+    "type": "generics",
     "named": true,
     "fields": {},
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "generic_identifier",
@@ -625,14 +608,6 @@
         "multiple": true,
         "required": false,
         "types": [
-          {
-            "type": "(",
-            "named": false
-          },
-          {
-            "type": ")",
-            "named": false
-          },
           {
             "type": ".",
             "named": false
@@ -654,7 +629,7 @@
             "named": true
           },
           {
-            "type": "generic_parameters",
+            "type": "generics",
             "named": true
           }
         ]
@@ -737,14 +712,6 @@
         "required": false,
         "types": [
           {
-            "type": "(",
-            "named": false
-          },
-          {
-            "type": ")",
-            "named": false
-          },
-          {
             "type": ".",
             "named": false
           },
@@ -765,7 +732,7 @@
             "named": true
           },
           {
-            "type": "generic_parameters",
+            "type": "generics",
             "named": true
           }
         ]
@@ -784,7 +751,7 @@
           "named": true
         },
         {
-          "type": "generic_parameters",
+          "type": "generics",
           "named": true
         },
         {
@@ -942,14 +909,6 @@
         "required": false,
         "types": [
           {
-            "type": "(",
-            "named": false
-          },
-          {
-            "type": ")",
-            "named": false
-          },
-          {
             "type": ".",
             "named": false
           },
@@ -970,7 +929,7 @@
             "named": true
           },
           {
-            "type": "generic_parameters",
+            "type": "generics",
             "named": true
           }
         ]
@@ -985,7 +944,7 @@
           "named": true
         },
         {
-          "type": "generic_parameters",
+          "type": "generics",
           "named": true
         },
         {
@@ -997,7 +956,7 @@
           "named": true
         },
         {
-          "type": "parameters",
+          "type": "method_parameters",
           "named": true
         },
         {
@@ -1006,6 +965,21 @@
         },
         {
           "type": "type_identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "method_parameters",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "parameters",
           "named": true
         }
       ]
@@ -1039,7 +1013,7 @@
           "named": true
         },
         {
-          "type": "generic_parameters",
+          "type": "generics",
           "named": true
         },
         {
@@ -1107,14 +1081,6 @@
         "required": false,
         "types": [
           {
-            "type": "(",
-            "named": false
-          },
-          {
-            "type": ")",
-            "named": false
-          },
-          {
             "type": ".",
             "named": false
           },
@@ -1135,7 +1101,7 @@
             "named": true
           },
           {
-            "type": "generic_parameters",
+            "type": "generics",
             "named": true
           }
         ]
@@ -1189,7 +1155,7 @@
       "required": true,
       "types": [
         {
-          "type": "generic_parameters",
+          "type": "generics",
           "named": true
         },
         {
@@ -1212,7 +1178,7 @@
       "required": false,
       "types": [
         {
-          "type": "generic_parameters",
+          "type": "generics",
           "named": true
         },
         {
@@ -1270,14 +1236,6 @@
         "required": false,
         "types": [
           {
-            "type": "(",
-            "named": false
-          },
-          {
-            "type": ")",
-            "named": false
-          },
-          {
             "type": ".",
             "named": false
           },
@@ -1298,7 +1256,7 @@
             "named": true
           },
           {
-            "type": "generic_parameters",
+            "type": "generics",
             "named": true
           }
         ]
@@ -1313,7 +1271,7 @@
           "named": true
         },
         {
-          "type": "generic_parameters",
+          "type": "generics",
           "named": true
         },
         {
@@ -1363,14 +1321,6 @@
         "required": false,
         "types": [
           {
-            "type": "(",
-            "named": false
-          },
-          {
-            "type": ")",
-            "named": false
-          },
-          {
             "type": ".",
             "named": false
           },
@@ -1391,7 +1341,7 @@
             "named": true
           },
           {
-            "type": "generic_parameters",
+            "type": "generics",
             "named": true
           }
         ]
@@ -1425,14 +1375,6 @@
         "required": false,
         "types": [
           {
-            "type": "(",
-            "named": false
-          },
-          {
-            "type": ")",
-            "named": false
-          },
-          {
             "type": ".",
             "named": false
           },
@@ -1453,7 +1395,7 @@
             "named": true
           },
           {
-            "type": "generic_parameters",
+            "type": "generics",
             "named": true
           }
         ]

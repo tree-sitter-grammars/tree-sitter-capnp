@@ -91,13 +91,15 @@ struct TestGenerics(Foo, Bar) {
         (definition
           (struct
             (type_identifier)
-            (generic_parameters
+            (generics)
+            (generics
               (generic_identifier
                 (custom_type
                   (identifier)))
               (generic_identifier
                 (custom_type
                   (identifier))))
+            (generics)
             (field
               (field_identifier)
               (field_version)
@@ -110,13 +112,15 @@ struct TestGenerics(Foo, Bar) {
               (field_type
                 (custom_type
                   (identifier)
-                  (generic_parameters
+                  (generics)
+                  (generics
                     (generic_identifier
                       (custom_type
                         (identifier)))
                     (generic_identifier
                       (custom_type
-                        (identifier)))))))
+                        (identifier))))
+                  (generics))))
             (field
               (union
                 (union_field
@@ -161,10 +165,12 @@ struct TestGenerics(Foo, Bar) {
               (nested_struct
                 (struct
                   (type_identifier)
-                  (generic_parameters
+                  (generics)
+                  (generics
                     (generic_identifier
                       (custom_type
                         (identifier))))
+                  (generics)
                   (field
                     (field_identifier)
                     (field_version)
@@ -193,10 +199,12 @@ struct TestGenerics(Foo, Bar) {
                     (nested_struct
                       (struct
                         (type_identifier)
-                        (generic_parameters
+                        (generics)
+                        (generics
                           (generic_identifier
                             (custom_type
                               (identifier))))
+                        (generics)
                         (field
                           (field_identifier)
                           (field_version)
@@ -224,46 +232,56 @@ struct TestGenerics(Foo, Bar) {
                         (field
                           (interface
                             (type_identifier)
-                            (generic_parameters
+                            (generics)
+                            (generics
                               (generic_identifier
                                 (custom_type
                                   (identifier))))
+                            (generics)
                             (comment)
                             (method
                               (method_identifier)
                               (field_version)
+                              (method_parameters)
                               (return_type))))))))))
             (field
               (interface
                 (type_identifier)
-                (generic_parameters
+                (generics)
+                (generics
                   (generic_identifier
                     (custom_type
                       (identifier))))
+                (generics)
                 (method
                   (method_identifier)
                   (field_version)
                   (type_identifier)
-                  (generic_parameters
+                  (generics)
+                  (generics
                     (generic_identifier
                       (primitive_type)))
+                  (generics)
                   (return_type
                     (named_return_type
                       (return_identifier)
                       (type_identifier)
                       (return_identifier)
                       (type_identifier)
-                      (generic_parameters
+                      (generics)
+                      (generics
                         (generic_identifier
                           (custom_type
                             (identifier)))
                         (generic_identifier
                           (custom_type
-                            (identifier)))))))))
+                            (identifier))))
+                      (generics))))))
             (field
               (annotation
                 (annotation_definition_identifier)
-                (annotation_target)
+                (annotation_targets
+                  (annotation_target))
                 (field_type
                   (custom_type
                     (identifier)))))
@@ -283,20 +301,24 @@ struct TestGenerics(Foo, Bar) {
               (replace_using
                 (type_definition)
                 (type_identifier)
-                (generic_parameters
+                (generics)
+                (generics
                   (generic_identifier
-                    (primitive_type)))))
+                    (primitive_type)))
+                (generics)))
             (using_directive
               (replace_using
                 (type_definition)
                 (type_identifier)
-                (generic_parameters
+                (generics)
+                (generics
                   (generic_identifier
                     (custom_type
                       (identifier)))
                   (generic_identifier
                     (custom_type
-                      (identifier))))))
+                      (identifier))))
+                (generics)))
             (field
               (nested_struct
                 (struct
@@ -325,9 +347,11 @@ struct TestGenerics(Foo, Bar) {
                     (field_type
                       (custom_type
                         (identifier)
-                        (generic_parameters
+                        (generics)
+                        (generics
                           (generic_identifier
-                            (primitive_type))))))
+                            (primitive_type)))
+                        (generics))))
                   (field
                     (field_identifier)
                     (field_version)
@@ -357,12 +381,14 @@ using BrandedAlias = TestGenerics(BoxedText, Text);
           (replace_using
             (type_definition)
             (type_identifier)
-            (generic_parameters
+            (generics)
+            (generics
               (generic_identifier
                 (custom_type
                   (identifier)))
               (generic_identifier
-                (primitive_type)))))))
+                (primitive_type)))
+            (generics)))))
 
 
 
@@ -381,26 +407,30 @@ struct TestGenericsWrapper(Foo, Bar) {
         (definition
           (struct
             (type_identifier)
-            (generic_parameters
+            (generics)
+            (generics
               (generic_identifier
                 (custom_type
                   (identifier)))
               (generic_identifier
                 (custom_type
                   (identifier))))
+            (generics)
             (field
               (field_identifier)
               (field_version)
               (field_type
                 (custom_type
                   (identifier)
-                  (generic_parameters
+                  (generics)
+                  (generics
                     (generic_identifier
                       (custom_type
                         (identifier)))
                     (generic_identifier
                       (custom_type
-                        (identifier)))))))))))
+                        (identifier))))
+                  (generics))))))))
 
 
 
@@ -425,12 +455,14 @@ struct TestGenericsWrapper2 {
               (field_type
                 (custom_type
                   (identifier)
-                  (generic_parameters
+                  (generics)
+                  (generics
                     (generic_identifier
                       (primitive_type))
                     (generic_identifier
                       (custom_type
-                        (identifier)))))))))))
+                        (identifier))))
+                  (generics))))))))
 
 
 
@@ -459,27 +491,30 @@ interface TestImplicitMethodParams {
                 (generic_identifier
                   (custom_type
                     (identifier))))
-              (parameters
-                (parameter
-                  (param_identifier)
-                  (field_type
-                    (custom_type
-                      (identifier))))
-                (parameter
-                  (param_identifier)
-                  (field_type
-                    (custom_type
-                      (identifier)))))
+              (method_parameters
+                (parameters
+                  (parameter
+                    (param_identifier)
+                    (field_type
+                      (custom_type
+                        (identifier))))
+                  (parameter
+                    (param_identifier)
+                    (field_type
+                      (custom_type
+                        (identifier))))))
               (return_type
                 (unnamed_return_type
                   (type_identifier))
-                (generic_parameters
+                (generics)
+                (generics
                   (generic_identifier
                     (custom_type
                       (identifier)))
                   (generic_identifier
                     (custom_type
-                      (identifier))))))))))
+                      (identifier))))
+                (generics)))))))
 
 
 
@@ -498,10 +533,12 @@ interface TestImplicitMethodParamsInGeneric(V) {
         (definition
           (interface
             (type_identifier)
-            (generic_parameters
+            (generics)
+            (generics
               (generic_identifier
                 (custom_type
                   (identifier))))
+            (generics)
             (method
               (method_identifier)
               (field_version)
@@ -512,27 +549,30 @@ interface TestImplicitMethodParamsInGeneric(V) {
                 (generic_identifier
                   (custom_type
                     (identifier))))
-              (parameters
-                (parameter
-                  (param_identifier)
-                  (field_type
-                    (custom_type
-                      (identifier))))
-                (parameter
-                  (param_identifier)
-                  (field_type
-                    (custom_type
-                      (identifier)))))
+              (method_parameters
+                (parameters
+                  (parameter
+                    (param_identifier)
+                    (field_type
+                      (custom_type
+                        (identifier))))
+                  (parameter
+                    (param_identifier)
+                    (field_type
+                      (custom_type
+                        (identifier))))))
               (return_type
                 (unnamed_return_type
                   (type_identifier))
-                (generic_parameters
+                (generics)
+                (generics
                   (generic_identifier
                     (custom_type
                       (identifier)))
                   (generic_identifier
                     (custom_type
-                      (identifier))))))))))
+                      (identifier))))
+                (generics)))))))
 
 
 
@@ -556,13 +596,15 @@ struct TestGenericsUnion(Foo, Bar) {
         (definition
           (struct
             (type_identifier)
-            (generic_parameters
+            (generics)
+            (generics
               (generic_identifier
                 (custom_type
                   (identifier)))
               (generic_identifier
                 (custom_type
                   (identifier))))
+            (generics)
             (comment)
             (field
               (union
@@ -633,13 +675,15 @@ struct TestUseGenerics $TestGenerics(Text, Data).ann("foo") {
           (struct
             (type_identifier)
             (annotation_identifier)
-            (generic_parameters
+            (generics)
+            (generics
               (generic_identifier
                 (primitive_type))
               (generic_identifier
                 (primitive_type)))
+            (generics)
             (attribute)
-            (annotation_literal   
+            (annotation_literal
               (string_literal))
             (field
               (field_identifier)
@@ -647,26 +691,30 @@ struct TestUseGenerics $TestGenerics(Text, Data).ann("foo") {
               (field_type
                 (custom_type
                   (identifier)
-                  (generic_parameters
-                    (generic_identifier
-                      (custom_type
-                        (identifier)))
-                    (generic_identifier
-                      (custom_type
-                        (identifier)))))))
-            (field
-              (field_identifier)
-              (field_version)
-              (field_type
-                (custom_type
-                  (identifier)
-                  (generic_parameters
+                  (generics)
+                  (generics
                     (generic_identifier
                       (custom_type
                         (identifier)))
                     (generic_identifier
                       (custom_type
                         (identifier))))
+                  (generics))))
+            (field
+              (field_identifier)
+              (field_version)
+              (field_type
+                (custom_type
+                  (identifier)
+                  (generics)
+                  (generics
+                    (generic_identifier
+                      (custom_type
+                        (identifier)))
+                    (generic_identifier
+                      (custom_type
+                        (identifier))))
+                  (generics)
                   (type_identifier))))
             (field
               (field_identifier)
@@ -674,17 +722,21 @@ struct TestUseGenerics $TestGenerics(Text, Data).ann("foo") {
               (field_type
                 (custom_type
                   (identifier)
-                  (generic_parameters
+                  (generics)
+                  (generics
                     (generic_identifier
                       (custom_type
                         (identifier)))
                     (generic_identifier
                       (custom_type
                         (identifier))))
+                  (generics)
                   (type_identifier)
-                  (generic_parameters
+                  (generics)
+                  (generics
                     (generic_identifier
-                      (primitive_type))))))
+                      (primitive_type)))
+                  (generics))))
             (field
               (field_identifier)
               (field_version)
@@ -697,41 +749,48 @@ struct TestUseGenerics $TestGenerics(Text, Data).ann("foo") {
               (field_type
                 (custom_type
                   (identifier)
-                  (generic_parameters
+                  (generics)
+                  (generics
                     (generic_identifier
-                      (primitive_type))))))
+                      (primitive_type)))
+                  (generics))))
             (field
               (field_identifier)
               (field_version)
               (field_type
                 (custom_type
                   (identifier)
-                  (generic_parameters
+                  (generics)
+                  (generics
                     (generic_identifier
                       (custom_type
                         (identifier)))
                     (generic_identifier
                       (custom_type
-                        (identifier)))))))
+                        (identifier))))
+                  (generics))))
             (field
               (field_identifier)
               (field_version)
               (field_type
                 (custom_type
                   (identifier)
-                  (generic_parameters
+                  (generics)
+                  (generics
                     (generic_identifier
                       (custom_type
                         (identifier)))
                     (generic_identifier
-                      (primitive_type))))))
+                      (primitive_type)))
+                  (generics))))
             (field
               (field_identifier)
               (field_version)
               (field_type
                 (custom_type
                   (identifier)
-                  (generic_parameters
+                  (generics)
+                  (generics
                     (generic_identifier
                       (custom_type
                         (identifier)))
@@ -739,22 +798,27 @@ struct TestUseGenerics $TestGenerics(Text, Data).ann("foo") {
                       (list_type
                         (field_type
                           (primitive_type)))))
+                  (generics)
                   (type_identifier)
-                  (generic_parameters
+                  (generics)
+                  (generics
                     (generic_identifier
-                      (primitive_type))))))
+                      (primitive_type)))
+                  (generics))))
             (field
               (field_identifier)
               (field_version)
               (field_type
                 (custom_type
                   (identifier)
-                  (generic_parameters
+                  (generics)
+                  (generics
                     (generic_identifier
                       (custom_type
                         (identifier)))
                     (generic_identifier
-                      (primitive_type)))))
+                      (primitive_type)))
+                  (generics)))
               (const_value
                 (struct_shorthand
                   (property)
@@ -784,12 +848,14 @@ struct TestUseGenerics $TestGenerics(Text, Data).ann("foo") {
               (field_type
                 (custom_type
                   (identifier)
-                  (generic_parameters
+                  (generics)
+                  (generics
                     (generic_identifier
                       (custom_type
                         (identifier)))
                     (generic_identifier
                       (primitive_type)))
+                  (generics)
                   (type_identifier)))
               (const_value
                 (struct_shorthand
@@ -825,12 +891,14 @@ struct TestUseGenerics $TestGenerics(Text, Data).ann("foo") {
               (field_type
                 (custom_type
                   (identifier)
-                  (generic_parameters
+                  (generics)
+                  (generics
                     (generic_identifier
                       (primitive_type))
                     (generic_identifier
                       (custom_type
-                        (identifier))))))
+                        (identifier))))
+                  (generics)))
               (const_value
                 (struct_shorthand
                   (property)
@@ -880,13 +948,15 @@ struct TestUseGenerics $TestGenerics(Text, Data).ann("foo") {
               (field_type
                 (custom_type
                   (identifier)
-                  (generic_parameters
+                  (generics)
+                  (generics
                     (generic_identifier
                       (custom_type
                         (identifier)))
                     (generic_identifier
                       (custom_type
                         (identifier))))
+                  (generics)
                   (type_identifier)))
               (const_value
                 (struct_shorthand
@@ -899,13 +969,15 @@ struct TestUseGenerics $TestGenerics(Text, Data).ann("foo") {
               (field_type
                 (custom_type
                   (identifier)
-                  (generic_parameters
+                  (generics)
+                  (generics
                     (generic_identifier
                       (custom_type
                         (identifier)))
                     (generic_identifier
                       (custom_type
                         (identifier))))
+                  (generics)
                   (type_identifier)))
               (const_value
                 (struct_shorthand
@@ -921,13 +993,15 @@ struct TestUseGenerics $TestGenerics(Text, Data).ann("foo") {
               (field_type
                 (custom_type
                   (identifier)
-                  (generic_parameters
+                  (generics)
+                  (generics
                     (generic_identifier
                       (custom_type
                         (identifier)))
                     (generic_identifier
                       (custom_type
                         (identifier))))
+                  (generics)
                   (type_identifier)))
               (const_value
                 (struct_shorthand
@@ -946,19 +1020,23 @@ struct TestUseGenerics $TestGenerics(Text, Data).ann("foo") {
               (field_type
                 (custom_type
                   (identifier)
-                  (generic_parameters
+                  (generics)
+                  (generics
                     (generic_identifier
                       (custom_type
                         (identifier)))
                     (generic_identifier
                       (custom_type
                         (identifier))))
+                  (generics)
                   (type_identifier)
-                  (generic_parameters
+                  (generics)
+                  (generics
                     (generic_identifier
                       (list_type
                         (field_type
-                          (primitive_type)))))))
+                          (primitive_type)))))
+                  (generics)))
               (const_value
                 (struct_shorthand
                   (property)
@@ -983,13 +1061,15 @@ struct TestUseGenerics $TestGenerics(Text, Data).ann("foo") {
               (field_type
                 (custom_type
                   (identifier)
-                  (generic_parameters
+                  (generics)
+                  (generics
                     (generic_identifier
                       (custom_type
                         (identifier)))
                     (generic_identifier
                       (custom_type
                         (identifier))))
+                  (generics)
                   (type_identifier)))
               (const_value
                 (struct_shorthand
@@ -1011,12 +1091,14 @@ struct TestUseGenerics $TestGenerics(Text, Data).ann("foo") {
               (field_type
                 (custom_type
                   (identifier)
-                  (generic_parameters
+                  (generics)
+                  (generics
                     (generic_identifier
                       (custom_type
                         (identifier)))
                     (generic_identifier
                       (primitive_type)))
+                  (generics)
                   (type_identifier)))
               (const_value
                 (string_literal)))
@@ -1026,7 +1108,8 @@ struct TestUseGenerics $TestGenerics(Text, Data).ann("foo") {
               (field_type
                 (custom_type
                   (identifier)
-                  (generic_parameters
+                  (generics)
+                  (generics
                     (generic_identifier
                       (custom_type
                         (identifier)))
@@ -1034,6 +1117,7 @@ struct TestUseGenerics $TestGenerics(Text, Data).ann("foo") {
                       (list_type
                         (field_type
                           (primitive_type)))))
+                  (generics)
                   (type_identifier)))
               (const_value
                 (struct_shorthand
