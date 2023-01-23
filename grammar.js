@@ -8,6 +8,7 @@ const list_seq = (rule, separator, trailing_separator = false) =>
 const comma_sep1 = (rule) => list_seq(rule, ',');
 
 const primitives = [
+  'AnyPointer',
   'Bool',
   'Int8',
   'Int16',
@@ -435,6 +436,7 @@ module.exports = grammar({
         $.data,
         $.const_list,
         $.void,
+        $.embedded_file,
       ),
     _same_scope_const_value: ($) => seq('.', $.const_value),
 
@@ -503,6 +505,8 @@ module.exports = grammar({
         ),
         ')',
       ),
+
+    embedded_file: ($) => seq('embed', $._string_literal),
 
     _generics: ($) => seq('(', $.generic_parameters, ')'),
     _implicit_generics: ($) => seq('[', alias($.generic_parameters, $.implicit_generic_parameters), ']'),
