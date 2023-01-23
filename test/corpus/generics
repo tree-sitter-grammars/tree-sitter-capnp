@@ -262,7 +262,7 @@ struct TestGenerics(Foo, Bar) {
                             (identifier)))))))))
             (field
               (annotation
-                (annotation_identifier)
+                (annotation_definition_identifier)
                 (annotation_target)
                 (field_type
                   (custom_type

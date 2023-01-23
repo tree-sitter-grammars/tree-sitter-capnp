@@ -405,7 +405,7 @@ interface TestMoreStuff extends(TestCallOrder) {
                     (custom_type
                       (identifier)))
                   (const_value
-                    (identifier)))))
+                    (const_identifier)))))
             (method
               (method_identifier)
               (field_version)

@@ -710,7 +710,7 @@ struct TestNestedTypes {
                       (custom_type
                         (identifier)))
                     (const_value
-                      (identifier)))
+                      (const_identifier)))
                   (field
                     (field_identifier)
                     (field_version)
@@ -718,7 +718,7 @@ struct TestNestedTypes {
                       (custom_type
                         (identifier)))
                     (const_value
-                      (identifier))))))
+                      (const_identifier))))))
             (field
               (field_identifier)
               (field_version)
@@ -732,7 +732,7 @@ struct TestNestedTypes {
                 (custom_type
                   (identifier)))
               (const_value
-                (identifier)))
+                (const_identifier)))
             (field
               (field_identifier)
               (field_version)
@@ -740,7 +740,7 @@ struct TestNestedTypes {
                 (custom_type
                   (identifier)))
               (const_value
-                (identifier)))))))
+                (const_identifier)))))))
 
 
 
@@ -776,7 +776,7 @@ struct TestUsing {
                 (custom_type
                   (identifier)))
               (const_value
-                (identifier)))
+                (const_identifier)))
             (field
               (field_identifier)
               (field_version)
@@ -784,7 +784,7 @@ struct TestUsing {
                 (custom_type
                   (identifier)))
               (const_value
-                (identifier)))))))
+                (const_identifier)))))))
 
 
 
