@@ -2221,7 +2221,7 @@
                     "type": "ALIAS",
                     "content": {
                       "type": "SYMBOL",
-                      "name": "_identifier_no_dot"
+                      "name": "_identifier_no_period"
                     },
                     "named": true,
                     "value": "type_identifier"
@@ -2245,7 +2245,7 @@
               "type": "ALIAS",
               "content": {
                 "type": "SYMBOL",
-                "name": "_identifier_no_dot"
+                "name": "_identifier_no_period"
               },
               "named": true,
               "value": "const_identifier"
@@ -2256,7 +2256,7 @@
           "type": "ALIAS",
           "content": {
             "type": "SYMBOL",
-            "name": "_identifier_no_dot"
+            "name": "_identifier_no_period"
           },
           "named": true,
           "value": "const_identifier"
@@ -2465,7 +2465,7 @@
       "type": "PATTERN",
       "value": "[A-Za-z_][A-Za-z0-9._]*"
     },
-    "_identifier_no_dot": {
+    "_identifier_no_period": {
       "type": "PATTERN",
       "value": "[A-Za-z_][A-Za-z0-9_]*"
     },
