@@ -952,6 +952,10 @@
           "named": true
         },
         {
+          "type": "implicit_generics",
+          "named": true
+        },
+        {
           "type": "method_identifier",
           "named": true
         },
@@ -1022,6 +1026,21 @@
         },
         {
           "type": "type_identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "named_return_types",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "named_return_type",
           "named": true
         }
       ]
@@ -1175,14 +1194,14 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "generics",
           "named": true
         },
         {
-          "type": "named_return_type",
+          "type": "named_return_types",
           "named": true
         },
         {
@@ -1680,6 +1699,10 @@
   },
   {
     "type": "identifier",
+    "named": true
+  },
+  {
+    "type": "implicit_generics",
     "named": true
   },
   {

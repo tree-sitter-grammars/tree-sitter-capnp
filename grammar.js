@@ -375,11 +375,7 @@ module.exports = grammar({
 
     return_type: ($) =>
       choice(
-        seq(
-          '(',
-          optional($.named_return_type),
-          ')',
-        ),
+        $.named_return_types,
         seq($.unnamed_return_type, optional($._generics)),
       ),
     named_return_types: ($) =>
@@ -531,7 +527,7 @@ module.exports = grammar({
     embedded_file: ($) => seq('embed', $._string_literal),
 
     _generics: ($) => alias(seq('(', $.generic_parameters, ')'), $.generics),
-    _implicit_generics: ($) => seq('[', alias($.generic_parameters, $.implicit_generic_parameters), ']'),
+    _implicit_generics: ($) => alias(seq('[', alias($.generic_parameters, $.implicit_generic_parameters), ']'), $.implicit_generics),
     generic_parameters: ($) => comma_sep1($._generic_identifier),
 
     _string_literal: ($) => alias(/"([^"\\]|\\.)*"|'([^'\\]|\\.)*'/, $.string_literal),

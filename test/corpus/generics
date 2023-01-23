@@ -243,7 +243,8 @@ struct TestGenerics(Foo, Bar) {
                               (method_identifier)
                               (field_version)
                               (method_parameters)
-                              (return_type))))))))))
+                              (return_type
+                                (named_return_types)))))))))))
             (field
               (interface
                 (type_identifier)
@@ -263,20 +264,21 @@ struct TestGenerics(Foo, Bar) {
                       (primitive_type)))
                   (generics)
                   (return_type
-                    (named_return_type
-                      (return_identifier)
-                      (type_identifier)
-                      (return_identifier)
-                      (type_identifier)
-                      (generics)
-                      (generics
-                        (generic_identifier
-                          (custom_type
-                            (identifier)))
-                        (generic_identifier
-                          (custom_type
-                            (identifier))))
-                      (generics))))))
+                    (named_return_types
+                      (named_return_type
+                        (return_identifier)
+                        (type_identifier)
+                        (return_identifier)
+                        (type_identifier)
+                        (generics)
+                        (generics
+                          (generic_identifier
+                            (custom_type
+                              (identifier)))
+                          (generic_identifier
+                            (custom_type
+                              (identifier))))
+                        (generics)))))))
             (field
               (annotation
                 (annotation_definition_identifier)
@@ -484,6 +486,7 @@ interface TestImplicitMethodParams {
             (method
               (method_identifier)
               (field_version)
+			  (implicit_generics)
               (implicit_generic_parameters
                 (generic_identifier
                   (custom_type
@@ -491,6 +494,7 @@ interface TestImplicitMethodParams {
                 (generic_identifier
                   (custom_type
                     (identifier))))
+			  (implicit_generics)
               (method_parameters
                 (parameters
                   (parameter
@@ -542,6 +546,7 @@ interface TestImplicitMethodParamsInGeneric(V) {
             (method
               (method_identifier)
               (field_version)
+			  (implicit_generics)
               (implicit_generic_parameters
                 (generic_identifier
                   (custom_type
@@ -549,6 +554,7 @@ interface TestImplicitMethodParamsInGeneric(V) {
                 (generic_identifier
                   (custom_type
                     (identifier))))
+			  (implicit_generics)
               (method_parameters
                 (parameters
                   (parameter

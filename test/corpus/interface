@@ -79,11 +79,12 @@ interface TestPipeline {
                       (custom_type
                         (identifier))))))
               (return_type
-                (named_return_type
-                  (return_identifier)
-                  (type_identifier)
-                  (return_identifier)
-                  (type_identifier))))
+                (named_return_types
+                  (named_return_type
+                    (return_identifier)
+                    (type_identifier)
+                    (return_identifier)
+                    (type_identifier)))))
             (method
               (method_identifier)
               (field_version)
@@ -105,7 +106,8 @@ interface TestPipeline {
                         (field_type
                           (custom_type
                             (identifier))))))))
-              (return_type))
+              (return_type
+                (named_return_types)))
             (method
               (method_identifier)
               (field_version)
@@ -121,19 +123,21 @@ interface TestPipeline {
                       (custom_type
                         (identifier))))))
               (return_type
-                (named_return_type
-                  (return_identifier)
-                  (type_identifier)
-                  (return_identifier)
-                  (type_identifier))))
+                (named_return_types
+                  (named_return_type
+                    (return_identifier)
+                    (type_identifier)
+                    (return_identifier)
+                    (type_identifier)))))
             (method
               (method_identifier)
               (field_version)
               (method_parameters)
               (return_type
-                (named_return_type
-                  (return_identifier)
-                  (type_identifier))))
+                (named_return_types
+                  (named_return_type
+                    (return_identifier)
+                    (type_identifier)))))
             (comment)
             (struct
               (type_identifier)
@@ -202,11 +206,12 @@ interface TestStreaming $Cxx.allowCancellation {
               (field_version)
               (method_parameters)
               (return_type
-                (named_return_type
-                  (return_identifier)
-                  (type_identifier)
-                  (return_identifier)
-                  (type_identifier))))
+                (named_return_types
+                  (named_return_type
+                    (return_identifier)
+                    (type_identifier)
+                    (return_identifier)
+                    (type_identifier)))))
             (comment)))))
 
 
@@ -285,9 +290,10 @@ interface TestMoreStuff extends(TestCallOrder) {
                       (custom_type
                         (identifier))))))
               (return_type
-                (named_return_type
-                  (return_identifier)
-                  (type_identifier))))
+                (named_return_types
+                  (named_return_type
+                    (return_identifier)
+                    (type_identifier)))))
             (comment)
             (method
               (method_identifier)
@@ -300,9 +306,10 @@ interface TestMoreStuff extends(TestCallOrder) {
                       (custom_type
                         (identifier))))))
               (return_type
-                (named_return_type
-                  (return_identifier)
-                  (type_identifier))))
+                (named_return_types
+                  (named_return_type
+                    (return_identifier)
+                    (type_identifier)))))
             (comment)
             (method
               (method_identifier)
@@ -315,9 +322,10 @@ interface TestMoreStuff extends(TestCallOrder) {
                       (custom_type
                         (identifier))))))
               (return_type
-                (named_return_type
-                  (return_identifier)
-                  (type_identifier)))
+                (named_return_types
+                  (named_return_type
+                    (return_identifier)
+                    (type_identifier))))
               (annotation_identifier))
             (comment)
             (method
@@ -330,25 +338,28 @@ interface TestMoreStuff extends(TestCallOrder) {
                     (field_type
                       (custom_type
                         (identifier))))))
-              (return_type))
+              (return_type
+                (named_return_types)))
             (comment)
             (method
               (method_identifier)
               (field_version)
               (method_parameters)
               (return_type
-                (named_return_type
-                  (return_identifier)
-                  (type_identifier))))
+                (named_return_types
+                  (named_return_type
+                    (return_identifier)
+                    (type_identifier)))))
             (comment)
             (method
               (method_identifier)
               (field_version)
               (method_parameters)
               (return_type
-                (named_return_type
-                  (return_identifier)
-                  (type_identifier))))
+                (named_return_types
+                  (named_return_type
+                    (return_identifier)
+                    (type_identifier)))))
             (comment)
             (method
               (method_identifier)
@@ -361,9 +372,10 @@ interface TestMoreStuff extends(TestCallOrder) {
                       (custom_type
                         (identifier))))))
               (return_type
-                (named_return_type
-                  (return_identifier)
-                  (type_identifier))))
+                (named_return_types
+                  (named_return_type
+                    (return_identifier)
+                    (type_identifier)))))
             (comment)
             (method
               (method_identifier)
@@ -375,7 +387,8 @@ interface TestMoreStuff extends(TestCallOrder) {
                     (field_type
                       (custom_type
                         (identifier))))))
-              (return_type)
+              (return_type
+                (named_return_types))
               (annotation_identifier))
             (comment)
             (method
@@ -400,13 +413,14 @@ interface TestMoreStuff extends(TestCallOrder) {
                     (const_value
                       (string_literal)))))
               (return_type
-                (named_return_type
-                  (return_identifier)
-                  (type_identifier)
-                  (return_identifier)
-                  (type_identifier)
-                  (const_value
-                    (string_literal)))))
+                (named_return_types
+                  (named_return_type
+                    (return_identifier)
+                    (type_identifier)
+                    (return_identifier)
+                    (type_identifier)
+                    (const_value
+                      (string_literal))))))
             (method
               (method_identifier)
               (field_version)
@@ -428,9 +442,10 @@ interface TestMoreStuff extends(TestCallOrder) {
               (field_version)
               (method_parameters)
               (return_type
-                (named_return_type
-                  (return_identifier)
-                  (type_identifier))))
+                (named_return_types
+                  (named_return_type
+                    (return_identifier)
+                    (type_identifier)))))
             (comment)
             (comment)
             (method
@@ -438,18 +453,20 @@ interface TestMoreStuff extends(TestCallOrder) {
               (field_version)
               (method_parameters)
               (return_type
-                (named_return_type
-                  (return_identifier)
-                  (type_identifier))))
+                (named_return_types
+                  (named_return_type
+                    (return_identifier)
+                    (type_identifier)))))
             (comment)
             (method
               (method_identifier)
               (field_version)
               (method_parameters)
               (return_type
-                (named_return_type
-                  (return_identifier)
-                  (type_identifier))))
+                (named_return_types
+                  (named_return_type
+                    (return_identifier)
+                    (type_identifier)))))
             (comment)
             (method
               (method_identifier)
@@ -467,11 +484,12 @@ interface TestMoreStuff extends(TestCallOrder) {
                       (custom_type
                         (identifier))))))
               (return_type
-                (named_return_type
-                  (return_identifier)
-                  (type_identifier)
-                  (return_identifier)
-                  (type_identifier))))
+                (named_return_types
+                  (named_return_type
+                    (return_identifier)
+                    (type_identifier)
+                    (return_identifier)
+                    (type_identifier)))))
             (comment)
             (comment)
             (method

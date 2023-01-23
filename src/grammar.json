@@ -1430,29 +1430,8 @@
       "type": "CHOICE",
       "members": [
         {
-          "type": "SEQ",
-          "members": [
-            {
-              "type": "STRING",
-              "value": "("
-            },
-            {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "SYMBOL",
-                  "name": "named_return_type"
-                },
-                {
-                  "type": "BLANK"
-                }
-              ]
-            },
-            {
-              "type": "STRING",
-              "value": ")"
-            }
-          ]
+          "type": "SYMBOL",
+          "name": "named_return_types"
         },
         {
           "type": "SEQ",
@@ -2337,26 +2316,31 @@
       "value": "generics"
     },
     "_implicit_generics": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "["
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "generic_parameters"
+      "type": "ALIAS",
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "STRING",
+            "value": "["
           },
-          "named": true,
-          "value": "implicit_generic_parameters"
-        },
-        {
-          "type": "STRING",
-          "value": "]"
-        }
-      ]
+          {
+            "type": "ALIAS",
+            "content": {
+              "type": "SYMBOL",
+              "name": "generic_parameters"
+            },
+            "named": true,
+            "value": "implicit_generic_parameters"
+          },
+          {
+            "type": "STRING",
+            "value": "]"
+          }
+        ]
+      },
+      "named": true,
+      "value": "implicit_generics"
     },
     "generic_parameters": {
       "type": "SEQ",
