@@ -159,7 +159,7 @@ module.exports = grammar({
     annotation: ($) =>
       seq(
         'annotation',
-        $._annotation_identifier,
+        $._annotation_definition_identifier,
         optional($.unique_id),
         '(',
         list_seq($.annotation_target, ','),
@@ -293,29 +293,27 @@ module.exports = grammar({
         $.interface,
       ),
 
-    union: ($) =>
+    union: ($) => choice($._named_union, $._unnamed_union),
+    nested_union: ($) => $.union,
+    _unnamed_union: ($) => seq('union', '{', repeat($.union_field), '}'),
+    _named_union: ($) =>
       seq(
-        choice(
-          seq(
-            $._type_identifier,
-            optional($.field_version),
-            ':',
-            'union',
-            repeat($._annotation_call),
-            '{',
-          ),
-          token(/union\s*\{/),
-        ),
+        $._type_identifier,
+        optional($.field_version),
+        ':',
+        'union',
+        repeat($._annotation_call),
+        '{',
         repeat($.union_field),
         '}',
       ),
-    nested_union: ($) => $.union,
 
     union_field: ($) =>
       choice(
+        // why does this work...when we have a choice with 'union'...
         // only difference with a field is it cannot have a default value..right?
         seq(
-          $._field_identifier,
+          choice(alias('union', $.field_identifier), $._field_identifier),
           $.field_version,
           ':',
           $.field_type,
@@ -433,7 +431,7 @@ module.exports = grammar({
         $.multi_string_literal,
         $.block_text,
         $.struct_shorthand,
-        $.identifier,
+        $._internal_const_identifier,
         $.data,
         $.const_list,
         $.void,
@@ -488,7 +486,7 @@ module.exports = grammar({
 
     // 0x"62 61 72"; # "bar"
     // data can be spaced or not?
-    data: ($) => seq('0x', alias(/"([0-9A-Fa-f]{2} ?)*"/, $.data_string)),
+    data: ($) => seq(alias('0x', $.data_hex), alias(/"([0-9A-Fa-f]{2} ?)*"/, $.data_string)),
 
     const_list: ($) =>
       seq('[', comma_sep1($.const_value), ']'),
@@ -503,17 +501,21 @@ module.exports = grammar({
           '=',
           choice(
             $._same_scope_const_value,
-            seq(
-              // Foo.Bar.Etc...
-              repeat1(seq(alias(/[A-Za-z_][A-Za-z0-9_]*/, $._type_identifier), '.')),
-              // ... Baz
-              alias(/[A-Za-z_][A-Za-z0-9_]*/, $._const_identifier),
-            ),
+            $.const_value,
           ),
           optional(',')),
         ),
         ')',
       ),
+    _internal_const_identifier: ($) => choice(
+      seq(
+      // Foo.Bar.Etc...
+        repeat1(seq(alias($._identifier_no_dot, $.type_identifier), optional('.'))),
+        // ... Baz
+        alias($._identifier_no_dot, $.const_identifier),
+      ),
+      alias($._identifier_no_dot, $.const_identifier),
+    ),
 
     embedded_file: ($) => seq('embed', $._string_literal),
 
@@ -525,15 +527,12 @@ module.exports = grammar({
 
     // multiple string literals only separated by whitespace, effectively a string concatenation
     multi_string_literal: ($) =>
-      alias(
-        seq(
+      seq(
+        $._string_literal,
+        repeat1(seq(
+          /\s+/,
           $._string_literal,
-          repeat1(seq(
-            /\s+/,
-            $._string_literal,
-          )),
-        ),
-        $.string_concatenation,
+        )),
       ),
 
     // block texts start with a ` only, and end after a newline
@@ -552,7 +551,9 @@ module.exports = grammar({
     _import_path: ($) => alias($._string_literal, $.import_path),
 
     identifier: () => /[A-Za-z_][A-Za-z0-9._]*/,
+    _identifier_no_dot: () => /[A-Za-z_][A-Za-z0-9_]*/,
 
+    _annotation_definition_identifier: ($) => alias($.identifier, $.annotation_definition_identifier),
     _annotation_identifier: ($) => alias($.identifier, $.annotation_identifier),
     _const_identifier: ($) => alias($.identifier, $.const_identifier),
     _enum_identifier: ($) => alias($.identifier, $.enum_identifier),
