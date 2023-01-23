@@ -262,7 +262,8 @@ module.exports = grammar({
     group: ($) =>
       seq(
         $._type_identifier,
-        ':group',
+        ':',
+        'group',
         repeat($._annotation_call),
         '{',
         repeat($.field),
@@ -432,13 +433,13 @@ module.exports = grammar({
         $.multi_string_literal,
         $.block_text,
         $.struct_shorthand,
-        $._const_identifier,
+        $.identifier,
         $.data,
         $.const_list,
         $.void,
         $.embedded_file,
       ),
-    _same_scope_const_value: ($) => seq('.', $.const_value),
+    _same_scope_const_value: ($) => seq('.', alias($.const_value, $.local_const)),
 
     number: () => {
       const hex_literal = seq(
@@ -500,7 +501,15 @@ module.exports = grammar({
         repeat(seq(
           $._property,
           '=',
-          choice($._same_scope_const_value, $.const_value),
+          choice(
+            $._same_scope_const_value,
+            seq(
+              // Foo.Bar.Etc...
+              repeat1(seq(alias(/[A-Za-z_][A-Za-z0-9_]*/, $._type_identifier), '.')),
+              // ... Baz
+              alias(/[A-Za-z_][A-Za-z0-9_]*/, $._const_identifier),
+            ),
+          ),
           optional(',')),
         ),
         ')',
