@@ -197,6 +197,10 @@
           "named": true
         },
         {
+          "type": "const_identifier",
+          "named": true
+        },
+        {
           "type": "const_list",
           "named": true
         },
@@ -210,10 +214,6 @@
         },
         {
           "type": "float",
-          "named": true
-        },
-        {
-          "type": "identifier",
           "named": true
         },
         {

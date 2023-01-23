@@ -1736,7 +1736,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "identifier"
+          "name": "_const_identifier"
         },
         {
           "type": "SYMBOL",
