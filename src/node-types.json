@@ -197,10 +197,6 @@
           "named": true
         },
         {
-          "type": "const_identifier",
-          "named": true
-        },
-        {
           "type": "const_list",
           "named": true
         },
@@ -214,6 +210,10 @@
         },
         {
           "type": "float",
+          "named": true
+        },
+        {
+          "type": "identifier",
           "named": true
         },
         {
@@ -848,6 +848,65 @@
     }
   },
   {
+    "type": "local_const",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "block_text",
+          "named": true
+        },
+        {
+          "type": "boolean",
+          "named": true
+        },
+        {
+          "type": "const_list",
+          "named": true
+        },
+        {
+          "type": "data",
+          "named": true
+        },
+        {
+          "type": "embedded_file",
+          "named": true
+        },
+        {
+          "type": "float",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "multi_string_literal",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "struct_shorthand",
+          "named": true
+        },
+        {
+          "type": "void",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "message",
     "named": true,
     "fields": {},
@@ -1284,7 +1343,15 @@
       "required": false,
       "types": [
         {
-          "type": "const_value",
+          "type": "_const_identifier",
+          "named": true
+        },
+        {
+          "type": "_type_identifier",
+          "named": true
+        },
+        {
+          "type": "local_const",
           "named": true
         },
         {
@@ -1509,10 +1576,6 @@
     "named": false
   },
   {
-    "type": ":group",
-    "named": false
-  },
-  {
     "type": ";",
     "named": false
   },
@@ -1591,6 +1654,14 @@
   {
     "type": "]",
     "named": false
+  },
+  {
+    "type": "_const_identifier",
+    "named": true
+  },
+  {
+    "type": "_type_identifier",
+    "named": true
   },
   {
     "type": "annotation",

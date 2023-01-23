@@ -838,7 +838,11 @@
         },
         {
           "type": "STRING",
-          "value": ":group"
+          "value": ":"
+        },
+        {
+          "type": "STRING",
+          "value": "group"
         },
         {
           "type": "REPEAT",
@@ -1736,7 +1740,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "_const_identifier"
+          "name": "identifier"
         },
         {
           "type": "SYMBOL",
@@ -1764,8 +1768,13 @@
           "value": "."
         },
         {
-          "type": "SYMBOL",
-          "name": "const_value"
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "const_value"
+          },
+          "named": true,
+          "value": "local_const"
         }
       ]
     },
@@ -2132,8 +2141,39 @@
                     "name": "_same_scope_const_value"
                   },
                   {
-                    "type": "SYMBOL",
-                    "name": "const_value"
+                    "type": "SEQ",
+                    "members": [
+                      {
+                        "type": "REPEAT1",
+                        "content": {
+                          "type": "SEQ",
+                          "members": [
+                            {
+                              "type": "ALIAS",
+                              "content": {
+                                "type": "PATTERN",
+                                "value": "[A-Za-z_][A-Za-z0-9_]*"
+                              },
+                              "named": true,
+                              "value": "_type_identifier"
+                            },
+                            {
+                              "type": "STRING",
+                              "value": "."
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "type": "ALIAS",
+                        "content": {
+                          "type": "PATTERN",
+                          "value": "[A-Za-z_][A-Za-z0-9_]*"
+                        },
+                        "named": true,
+                        "value": "_const_identifier"
+                      }
+                    ]
                   }
                 ]
               },
