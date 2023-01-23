@@ -47,7 +47,7 @@
       "required": true,
       "types": [
         {
-          "type": "annotation_identifier",
+          "type": "annotation_definition_identifier",
           "named": true
         },
         {
@@ -185,7 +185,7 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
         {
@@ -194,6 +194,10 @@
         },
         {
           "type": "boolean",
+          "named": true
+        },
+        {
+          "type": "const_identifier",
           "named": true
         },
         {
@@ -213,10 +217,6 @@
           "named": true
         },
         {
-          "type": "identifier",
-          "named": true
-        },
-        {
           "type": "multi_string_literal",
           "named": true
         },
@@ -230,6 +230,10 @@
         },
         {
           "type": "struct_shorthand",
+          "named": true
+        },
+        {
+          "type": "type_identifier",
           "named": true
         },
         {
@@ -267,9 +271,13 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "data_hex",
+          "named": true
+        },
         {
           "type": "data_string",
           "named": true
@@ -852,7 +860,7 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
         {
@@ -861,6 +869,10 @@
         },
         {
           "type": "boolean",
+          "named": true
+        },
+        {
+          "type": "const_identifier",
           "named": true
         },
         {
@@ -880,10 +892,6 @@
           "named": true
         },
         {
-          "type": "identifier",
-          "named": true
-        },
-        {
           "type": "multi_string_literal",
           "named": true
         },
@@ -897,6 +905,10 @@
         },
         {
           "type": "struct_shorthand",
+          "named": true
+        },
+        {
+          "type": "type_identifier",
           "named": true
         },
         {
@@ -1008,7 +1020,7 @@
       "required": true,
       "types": [
         {
-          "type": "string_concatenation",
+          "type": "string_literal",
           "named": true
         }
       ]
@@ -1250,21 +1262,6 @@
     }
   },
   {
-    "type": "string_concatenation",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "string_literal",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "struct",
     "named": true,
     "fields": {
@@ -1343,11 +1340,7 @@
       "required": false,
       "types": [
         {
-          "type": "_const_identifier",
-          "named": true
-        },
-        {
-          "type": "_type_identifier",
+          "type": "const_value",
           "named": true
         },
         {
@@ -1568,10 +1561,6 @@
     "named": false
   },
   {
-    "type": "0x",
-    "named": false
-  },
-  {
     "type": ":",
     "named": false
   },
@@ -1656,16 +1645,12 @@
     "named": false
   },
   {
-    "type": "_const_identifier",
-    "named": true
-  },
-  {
-    "type": "_type_identifier",
-    "named": true
-  },
-  {
     "type": "annotation",
     "named": false
+  },
+  {
+    "type": "annotation_definition_identifier",
+    "named": true
   },
   {
     "type": "annotation_identifier",
@@ -1689,6 +1674,10 @@
   },
   {
     "type": "const_identifier",
+    "named": true
+  },
+  {
+    "type": "data_hex",
     "named": true
   },
   {
