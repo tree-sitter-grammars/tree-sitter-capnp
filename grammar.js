@@ -161,12 +161,16 @@ module.exports = grammar({
         'annotation',
         $._annotation_definition_identifier,
         optional($.unique_id),
-        '(',
-        list_seq($.annotation_target, ','),
-        ')',
+        $.annotation_targets,
         optional(seq(':', $.field_type)),
         optional($._annotation_call),
         ';',
+      ),
+    annotation_targets: ($) =>
+      seq(
+        '(',
+        list_seq($.annotation_target, ','),
+        ')',
       ),
 
     annotation_target: () => choice(...annotation_targets),
@@ -345,7 +349,7 @@ module.exports = grammar({
         optional($._implicit_generics),
         choice(
           // method @0 (...)
-          seq('(', optional($.parameters), ')'),
+          $.method_parameters,
           // method @0 Foo
           seq($._type_identifier, optional($._generics)),
         ),
@@ -356,6 +360,7 @@ module.exports = grammar({
         optional($._annotation_call),
         ';',
       ),
+    method_parameters: ($) => seq('(', optional($.parameters), ')'),
 
     parameters: ($) => list_seq($.parameter, ','),
 
@@ -376,6 +381,12 @@ module.exports = grammar({
           ')',
         ),
         seq($.unnamed_return_type, optional($._generics)),
+      ),
+    named_return_types: ($) =>
+      seq(
+        '(',
+        optional($.named_return_type),
+        ')',
       ),
 
     unnamed_return_type: ($) => $._type_identifier,
@@ -519,7 +530,7 @@ module.exports = grammar({
 
     embedded_file: ($) => seq('embed', $._string_literal),
 
-    _generics: ($) => seq('(', $.generic_parameters, ')'),
+    _generics: ($) => alias(seq('(', $.generic_parameters, ')'), $.generics),
     _implicit_generics: ($) => seq('[', alias($.generic_parameters, $.implicit_generic_parameters), ']'),
     generic_parameters: ($) => comma_sep1($._generic_identifier),
 
