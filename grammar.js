@@ -432,7 +432,7 @@ module.exports = grammar({
         $.multi_string_literal,
         $.block_text,
         $.struct_shorthand,
-        $.identifier,
+        $._const_identifier,
         $.data,
         $.const_list,
         $.void,
