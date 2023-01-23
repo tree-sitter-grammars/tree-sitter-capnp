@@ -510,11 +510,11 @@ module.exports = grammar({
     _internal_const_identifier: ($) => choice(
       seq(
       // Foo.Bar.Etc...
-        repeat1(seq(alias($._identifier_no_dot, $.type_identifier), optional('.'))),
+        repeat1(seq(alias($._identifier_no_period, $.type_identifier), optional('.'))),
         // ... Baz
-        alias($._identifier_no_dot, $.const_identifier),
+        alias($._identifier_no_period, $.const_identifier),
       ),
-      alias($._identifier_no_dot, $.const_identifier),
+      alias($._identifier_no_period, $.const_identifier),
     ),
 
     embedded_file: ($) => seq('embed', $._string_literal),
@@ -551,7 +551,7 @@ module.exports = grammar({
     _import_path: ($) => alias($._string_literal, $.import_path),
 
     identifier: () => /[A-Za-z_][A-Za-z0-9._]*/,
-    _identifier_no_dot: () => /[A-Za-z_][A-Za-z0-9_]*/,
+    _identifier_no_period: () => /[A-Za-z_][A-Za-z0-9_]*/,
 
     _annotation_definition_identifier: ($) => alias($.identifier, $.annotation_definition_identifier),
     _annotation_identifier: ($) => alias($.identifier, $.annotation_identifier),
