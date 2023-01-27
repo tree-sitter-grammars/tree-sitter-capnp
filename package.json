@@ -10,7 +10,7 @@
     "type": "git",
     "url": "git+https://github.com/amaanq/tree-sitter-capnp.git"
   },
-  "author": "Amaan Qureshi",
+  "author": "Amaan Qureshi <amaanq12@gmail.com>",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/amaanq/tree-sitter-capnp/issues"

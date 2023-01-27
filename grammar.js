@@ -1,10 +1,28 @@
 /* eslint-disable camelcase */
 
+/**
+* Creates a rule to match one or more of the rules separated by the separator
+* and optionally adds a trailing separator (default is false).
+*
+* @param {_} rule
+* @param {string} separator - The separator to use.
+* @param {string?} trailing_separator - The trailing separator to use.
+*
+* @return {_}
+*
+*/
 const list_seq = (rule, separator, trailing_separator = false) =>
   trailing_separator ?
     seq(rule, repeat(seq(separator, rule)), optional(separator)) :
     seq(rule, repeat(seq(separator, rule)));
 
+/**
+ * Creates a rule to match one or more of the rules separated by a comma
+ *
+ * @param {_} rule
+ *
+ * @return {_}
+ */
 const comma_sep1 = (rule) => list_seq(rule, ',');
 
 const primitives = [
