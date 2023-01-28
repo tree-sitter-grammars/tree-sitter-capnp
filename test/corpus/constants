@@ -448,10 +448,7 @@ struct TestConstants {
                           (struct_shorthand
                             (property)
                             (const_value
-                              (multi_string_literal
-                                (string_literal)
-                                (string_literal)
-                                (string_literal)))))
+                              (multi_string_literal))))
                         (const_value
                           (struct_shorthand
                             (property)

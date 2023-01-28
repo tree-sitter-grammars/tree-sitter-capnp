@@ -519,8 +519,9 @@ interface TestNameAnnotationInterface $Cxx.name("RenamedInterface") {
           (interface
             (type_identifier)
             (annotation_identifier)
-            (annotation_literal
-              (string_literal))
+            (annotation_array
+              (const_value
+                (string_literal)))
             (method
               (method_identifier)
               (field_version)
@@ -531,8 +532,10 @@ interface TestNameAnnotationInterface $Cxx.name("RenamedInterface") {
                     (field_type
                       (primitive_type))
                     (annotation_identifier)
-                    (annotation_literal
-                      (string_literal)))))
+                    (annotation_array
+                      (const_value
+                        (string_literal))))))
               (annotation_identifier)
-              (annotation_literal
-                (string_literal)))))))
+              (annotation_array
+                (const_value
+                  (string_literal))))))))

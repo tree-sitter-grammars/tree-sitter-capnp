@@ -66,8 +66,9 @@ struct TestNameAnnotation $Cxx.name("RenamedStruct") {
           (struct
             (type_identifier)
             (annotation_identifier)
-     (annotation_literal
-              (string_literal))
+            (annotation_array
+              (const_value
+                (string_literal)))
             (field
               (union
                 (union_field
@@ -76,8 +77,9 @@ struct TestNameAnnotation $Cxx.name("RenamedStruct") {
                   (field_type
                     (primitive_type))
                   (annotation_identifier)
-                  (annotation_literal
-                    (string_literal)))
+                  (annotation_array
+                    (const_value
+                      (string_literal))))
                 (union_field
                   (field_identifier)
                   (field_version)
@@ -88,8 +90,9 @@ struct TestNameAnnotation $Cxx.name("RenamedStruct") {
                 (enum
                   (enum_identifier)
                   (annotation_identifier)
-                  (annotation_literal
-                    (string_literal))
+                  (annotation_array
+                    (const_value
+                      (string_literal)))
                   (enum_field
                     (enum_member)
                     (field_version))
@@ -100,8 +103,9 @@ struct TestNameAnnotation $Cxx.name("RenamedStruct") {
                     (enum_member)
                     (field_version)
                     (annotation_identifier)
-                    (annotation_literal
-                      (string_literal))))))
+                    (annotation_array
+                      (const_value
+                        (string_literal)))))))
             (field
               (field_identifier)
               (field_version)
@@ -109,23 +113,26 @@ struct TestNameAnnotation $Cxx.name("RenamedStruct") {
                 (custom_type
                   (identifier)))
               (annotation_identifier)
-              (annotation_literal
-                (string_literal)))
+              (annotation_array
+                (const_value
+                  (string_literal))))
             (field
               (nested_struct
                 (struct
                   (type_identifier)
                   (annotation_identifier)
-                  (annotation_literal
-                    (string_literal))
+                  (annotation_array
+                    (const_value
+                      (string_literal)))
                   (field
                     (field_identifier)
                     (field_version)
                     (field_type
                       (primitive_type))
                     (annotation_identifier)
-                    (annotation_literal
-                      (string_literal)))
+                    (annotation_array
+                      (const_value
+                        (string_literal))))
                   (field
                     (field_identifier)
                     (field_version)
@@ -133,15 +140,17 @@ struct TestNameAnnotation $Cxx.name("RenamedStruct") {
                       (custom_type
                         (identifier)))
                     (annotation_identifier)
-                    (annotation_literal
-                      (string_literal)))
+                    (annotation_array
+                      (const_value
+                        (string_literal))))
                   (field
                     (nested_enum
                       (enum
                         (enum_identifier)
                         (annotation_identifier)
-                        (annotation_literal
-                          (string_literal))
+                        (annotation_array
+                          (const_value
+                            (string_literal)))
                         (enum_field
                           (enum_member)
                           (field_version))
@@ -152,20 +161,23 @@ struct TestNameAnnotation $Cxx.name("RenamedStruct") {
                           (enum_member)
                           (field_version)
                           (annotation_identifier)
-                          (annotation_literal
-                            (string_literal)))))))))
+                          (annotation_array
+                            (const_value
+                              (string_literal))))))))))
             (field
               (union
                 (type_identifier)
                 (annotation_identifier)
-                (annotation_literal
-                  (string_literal))
+                (annotation_array
+                  (const_value
+                    (string_literal)))
                 (union_field
                   (group
                     (type_identifier)
                     (annotation_identifier)
-                    (annotation_literal
-                      (string_literal))
+                    (annotation_array
+                      (const_value
+                        (string_literal)))
                     (field
                       (field_identifier)
                       (field_version)
@@ -183,5 +195,6 @@ struct TestNameAnnotation $Cxx.name("RenamedStruct") {
                     (custom_type
                       (identifier)))
                   (annotation_identifier)
-                  (annotation_literal
-                    (string_literal)))))))))
+                  (annotation_array
+                    (const_value
+                      (string_literal))))))))))

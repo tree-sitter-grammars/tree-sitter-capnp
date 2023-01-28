@@ -689,8 +689,9 @@ struct TestUseGenerics $TestGenerics(Text, Data).ann("foo") {
                 (primitive_type)))
             (generics)
             (attribute)
-            (annotation_literal
-              (string_literal))
+            (annotation_array
+              (const_value
+                (string_literal)))
             (field
               (field_identifier)
               (field_version)
