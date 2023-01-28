@@ -8,7 +8,19 @@
         "required": false,
         "types": [
           {
+            "type": "(",
+            "named": false
+          },
+          {
+            "type": ")",
+            "named": false
+          },
+          {
             "type": ".",
+            "named": false
+          },
+          {
+            "type": "=",
             "named": false
           },
           {
@@ -28,7 +40,15 @@
             "named": true
           },
           {
+            "type": "const_value",
+            "named": true
+          },
+          {
             "type": "generics",
+            "named": true
+          },
+          {
+            "type": "param_identifier",
             "named": true
           }
         ]
@@ -63,18 +83,18 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "annotation_array",
           "named": true
         },
         {
-          "type": "annotation_value",
+          "type": "const_value",
           "named": true
         },
         {
-          "type": "field_identifier",
+          "type": "property",
           "named": true
         }
       ]
@@ -89,7 +109,7 @@
       "required": true,
       "types": [
         {
-          "type": "string_literal",
+          "type": "const_value",
           "named": true
         }
       ]
@@ -110,21 +130,6 @@
       "types": [
         {
           "type": "annotation_target",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "annotation_value",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "string_literal",
           "named": true
         }
       ]
@@ -152,7 +157,58 @@
   {
     "type": "const",
     "named": true,
-    "fields": {},
+    "fields": {
+      "annotation_call": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "(",
+            "named": false
+          },
+          {
+            "type": ")",
+            "named": false
+          },
+          {
+            "type": ".",
+            "named": false
+          },
+          {
+            "type": "=",
+            "named": false
+          },
+          {
+            "type": "annotation_array",
+            "named": true
+          },
+          {
+            "type": "annotation_identifier",
+            "named": true
+          },
+          {
+            "type": "annotation_literal",
+            "named": true
+          },
+          {
+            "type": "attribute",
+            "named": true
+          },
+          {
+            "type": "const_value",
+            "named": true
+          },
+          {
+            "type": "generics",
+            "named": true
+          },
+          {
+            "type": "param_identifier",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
       "required": true,
@@ -168,6 +224,10 @@
         {
           "type": "field_type",
           "named": true
+        },
+        {
+          "type": "unique_id",
+          "named": true
         }
       ]
     }
@@ -178,7 +238,7 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "const_value",
@@ -343,7 +403,19 @@
         "required": false,
         "types": [
           {
+            "type": "(",
+            "named": false
+          },
+          {
+            "type": ")",
+            "named": false
+          },
+          {
             "type": ".",
+            "named": false
+          },
+          {
+            "type": "=",
             "named": false
           },
           {
@@ -363,7 +435,15 @@
             "named": true
           },
           {
+            "type": "const_value",
+            "named": true
+          },
+          {
             "type": "generics",
+            "named": true
+          },
+          {
+            "type": "param_identifier",
             "named": true
           }
         ]
@@ -397,7 +477,19 @@
         "required": false,
         "types": [
           {
+            "type": "(",
+            "named": false
+          },
+          {
+            "type": ")",
+            "named": false
+          },
+          {
             "type": ".",
+            "named": false
+          },
+          {
+            "type": "=",
             "named": false
           },
           {
@@ -417,7 +509,15 @@
             "named": true
           },
           {
+            "type": "const_value",
+            "named": true
+          },
+          {
             "type": "generics",
+            "named": true
+          },
+          {
+            "type": "param_identifier",
             "named": true
           }
         ]
@@ -447,7 +547,19 @@
         "required": false,
         "types": [
           {
+            "type": "(",
+            "named": false
+          },
+          {
+            "type": ")",
+            "named": false
+          },
+          {
             "type": ".",
+            "named": false
+          },
+          {
+            "type": "=",
             "named": false
           },
           {
@@ -467,7 +579,15 @@
             "named": true
           },
           {
+            "type": "const_value",
+            "named": true
+          },
+          {
             "type": "generics",
+            "named": true
+          },
+          {
+            "type": "param_identifier",
             "named": true
           }
         ]
@@ -506,6 +626,10 @@
           "named": true
         },
         {
+          "type": "import_path",
+          "named": true
+        },
+        {
           "type": "interface",
           "named": true
         },
@@ -515,6 +639,10 @@
         },
         {
           "type": "nested_struct",
+          "named": true
+        },
+        {
+          "type": "type_identifier",
           "named": true
         },
         {
@@ -609,7 +737,19 @@
         "required": false,
         "types": [
           {
+            "type": "(",
+            "named": false
+          },
+          {
+            "type": ")",
+            "named": false
+          },
+          {
             "type": ".",
+            "named": false
+          },
+          {
+            "type": "=",
             "named": false
           },
           {
@@ -629,7 +769,15 @@
             "named": true
           },
           {
+            "type": "const_value",
+            "named": true
+          },
+          {
             "type": "generics",
+            "named": true
+          },
+          {
+            "type": "param_identifier",
             "named": true
           }
         ]
@@ -712,7 +860,19 @@
         "required": false,
         "types": [
           {
+            "type": "(",
+            "named": false
+          },
+          {
+            "type": ")",
+            "named": false
+          },
+          {
             "type": ".",
+            "named": false
+          },
+          {
+            "type": "=",
             "named": false
           },
           {
@@ -732,7 +892,15 @@
             "named": true
           },
           {
+            "type": "const_value",
+            "named": true
+          },
+          {
             "type": "generics",
+            "named": true
+          },
+          {
+            "type": "param_identifier",
             "named": true
           }
         ]
@@ -772,36 +940,6 @@
         },
         {
           "type": "unique_id",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "lang_attrs",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": false,
-      "types": [
-        {
-          "type": "namespace",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "lang_declaration",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "lang_attrs",
           "named": true
         }
       ]
@@ -909,7 +1047,19 @@
         "required": false,
         "types": [
           {
+            "type": "(",
+            "named": false
+          },
+          {
+            "type": ")",
+            "named": false
+          },
+          {
             "type": ".",
+            "named": false
+          },
+          {
+            "type": "=",
             "named": false
           },
           {
@@ -929,7 +1079,15 @@
             "named": true
           },
           {
+            "type": "const_value",
+            "named": true
+          },
+          {
             "type": "generics",
+            "named": true
+          },
+          {
+            "type": "param_identifier",
             "named": true
           }
         ]
@@ -984,21 +1142,6 @@
       "types": [
         {
           "type": "parameters",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "multi_string_literal",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "string_literal",
           "named": true
         }
       ]
@@ -1100,7 +1243,19 @@
         "required": false,
         "types": [
           {
+            "type": "(",
+            "named": false
+          },
+          {
+            "type": ")",
+            "named": false
+          },
+          {
             "type": ".",
+            "named": false
+          },
+          {
+            "type": "=",
             "named": false
           },
           {
@@ -1120,7 +1275,15 @@
             "named": true
           },
           {
+            "type": "const_value",
+            "named": true
+          },
+          {
             "type": "generics",
+            "named": true
+          },
+          {
+            "type": "param_identifier",
             "named": true
           }
         ]
@@ -1232,7 +1395,7 @@
           "named": true
         },
         {
-          "type": "lang_declaration",
+          "type": "top_level_annotation",
           "named": true
         },
         {
@@ -1255,7 +1418,19 @@
         "required": false,
         "types": [
           {
+            "type": "(",
+            "named": false
+          },
+          {
+            "type": ")",
+            "named": false
+          },
+          {
             "type": ".",
+            "named": false
+          },
+          {
+            "type": "=",
             "named": false
           },
           {
@@ -1275,7 +1450,15 @@
             "named": true
           },
           {
+            "type": "const_value",
+            "named": true
+          },
+          {
             "type": "generics",
+            "named": true
+          },
+          {
+            "type": "param_identifier",
             "named": true
           }
         ]
@@ -1332,6 +1515,92 @@
     }
   },
   {
+    "type": "top_level_annotation",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "top_level_annotation_body",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "top_level_annotation_body",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "annotation_identifier",
+          "named": true
+        },
+        {
+          "type": "block_text",
+          "named": true
+        },
+        {
+          "type": "boolean",
+          "named": true
+        },
+        {
+          "type": "const_identifier",
+          "named": true
+        },
+        {
+          "type": "const_list",
+          "named": true
+        },
+        {
+          "type": "const_value",
+          "named": true
+        },
+        {
+          "type": "data",
+          "named": true
+        },
+        {
+          "type": "embedded_file",
+          "named": true
+        },
+        {
+          "type": "float",
+          "named": true
+        },
+        {
+          "type": "multi_string_literal",
+          "named": true
+        },
+        {
+          "type": "namespace",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "struct_shorthand",
+          "named": true
+        },
+        {
+          "type": "type_identifier",
+          "named": true
+        },
+        {
+          "type": "void",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "union",
     "named": true,
     "fields": {
@@ -1340,7 +1609,19 @@
         "required": false,
         "types": [
           {
+            "type": "(",
+            "named": false
+          },
+          {
+            "type": ")",
+            "named": false
+          },
+          {
             "type": ".",
+            "named": false
+          },
+          {
+            "type": "=",
             "named": false
           },
           {
@@ -1360,7 +1641,15 @@
             "named": true
           },
           {
+            "type": "const_value",
+            "named": true
+          },
+          {
             "type": "generics",
+            "named": true
+          },
+          {
+            "type": "param_identifier",
             "named": true
           }
         ]
@@ -1394,7 +1683,19 @@
         "required": false,
         "types": [
           {
+            "type": "(",
+            "named": false
+          },
+          {
+            "type": ")",
+            "named": false
+          },
+          {
             "type": ".",
+            "named": false
+          },
+          {
+            "type": "=",
             "named": false
           },
           {
@@ -1414,7 +1715,15 @@
             "named": true
           },
           {
+            "type": "const_value",
+            "named": true
+          },
+          {
             "type": "generics",
+            "named": true
+          },
+          {
+            "type": "param_identifier",
             "named": true
           }
         ]
@@ -1424,6 +1733,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "const_value",
+          "named": true
+        },
         {
           "type": "field_identifier",
           "named": true
@@ -1495,10 +1808,6 @@
   },
   {
     "type": "(",
-    "named": false
-  },
-  {
-    "type": "()",
     "named": false
   },
   {
@@ -1723,6 +2032,10 @@
   },
   {
     "type": "method_identifier",
+    "named": true
+  },
+  {
+    "type": "multi_string_literal",
     "named": true
   },
   {
