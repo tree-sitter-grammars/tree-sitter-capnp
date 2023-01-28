@@ -1,18 +1,17 @@
 {
   "name": "tree-sitter-capnp",
-  "version": "1.0.0",
-  "description": "Cap'n Proto grammar for Tree Sitter",
+  "version": "1.1.0",
+  "description": "Cap'n Proto grammar for tree-sitter",
   "main": "bindings/node",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/amaanq/tree-sitter-capnp.git"
-  },
+  "keywords": [
+    "parser",
+    "lexer"
+  ],
   "author": "Amaan Qureshi <amaanq12@gmail.com>",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/amaanq/tree-sitter-capnp/issues"
   },
-  "homepage": "https://github.com/amaanq/tree-sitter-capnp#readme",
   "dependencies": {
     "nan": "^2.17.0"
   },
@@ -21,10 +20,19 @@
     "eslint-config-google": "^0.14.0",
     "tree-sitter-cli": "^0.20.7"
   },
+  "repository": "https://github.com/amaanq/tree-sitter-capnp",
   "scripts": {
     "build": "tree-sitter generate && node-gyp build",
     "test": "tree-sitter test && script/parse-examples",
     "parse": "tree-sitter parse",
     "test-windows": "tree-sitter test"
-  }
+  },
+  "tree-sitter": [
+    {
+      "scope": "source.capnp",
+      "file-types": [
+        "capnp"
+      ]
+    }
+  ]
 }
