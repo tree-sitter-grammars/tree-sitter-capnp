@@ -1,0 +1,42 @@
+#!/bin/bash
+
+set -e
+
+cd "$(dirname "$0")/.."
+
+function checkout() {
+  repo=$1; url=$2; sha=$3
+
+  if [ ! -d "$repo" ]; then
+    git clone "https://github.com/$url" "$repo"
+  fi
+
+  pushd "$repo"
+  git fetch && git reset --hard "$sha"
+  popd
+}
+
+checkout examples/capnp capnproto/capnproto 9999d41b8a8f928eef6e0acdccd87dfd8339389c
+checkout examples/capnp-rust capnproto/capnproto-rust c1b4c3a9814560e92613998a1586c834a3d14b9d
+checkout examples/capnp-go capnproto/go-capnproto2 4837da4d685360bbd58b883e92db8bd78a230262
+checkout examples/capnp-py capnproto/pycapnp b791c61f8204ae84f8cbef61d454f2b7d53b0de2
+checkout examples/capnp-java capnproto/capnproto-java c2bacd9f17c035e9b14c74592e0a42ac74a75323
+checkout examples/ekam capnproto/ekam 755967bace086d6c1d79efe6261638e959e25c7e
+checkout examples/capnp-js capnproto/node-capnp 18c54885f44c781eacc2f62dbe32cffc41fe29f5
+checkout examples/capnp-ocaml capnproto/capnp-ocaml 7acfd0a547c490d84fb324a1df9642a8fa1adf7c
+checkout examples/capnp-d capnproto/capnproto-dlang 7a48c3ba4def5487d8d282ec894c07ff30d588be
+
+known_failures="$(cat script/known_failures.txt)"
+
+tree-sitter parse -q \
+  'examples/**/*.capnp' \
+  "$(for file in $known_failures; do echo "!${file}"; done)"
+
+example_count=$(find examples -name '*.capnp' | wc -l)
+failure_count=$(wc -w <<< "$known_failures")
+success_count=$(( example_count - failure_count ))
+success_percent=$(bc -l <<< "100*${success_count}/${example_count}")
+
+printf \
+  "Successfully parsed %d of %d example files (%.1f%%)\n" \
+  $success_count "$example_count" "$success_percent"
