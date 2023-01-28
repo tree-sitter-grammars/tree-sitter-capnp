@@ -1,16 +1,19 @@
 /* eslint-disable camelcase */
+/* eslint-disable-next-line spaced-comment */
+/// <reference types="tree-sitter-cli/dsl" />
+// @ts-check
 
 /**
-* Creates a rule to match one or more of the rules separated by the separator
-* and optionally adds a trailing separator (default is false).
-*
-* @param {_} rule
-* @param {string} separator - The separator to use.
-* @param {string?} trailing_separator - The trailing separator to use.
-*
-* @return {_}
-*
-*/
+ * Creates a rule to match one or more of the rules separated by the separator
+ * and optionally adds a trailing separator (default is false).
+ *
+ * @param {Rule } rule
+ * @param {string} separator - The separator to use.
+ * @param {boolean?} trailing_separator - The trailing separator to use.
+ *
+ * @return {SeqRule}
+ *
+ */
 const list_seq = (rule, separator, trailing_separator = false) =>
   trailing_separator ?
     seq(rule, repeat(seq(separator, rule)), optional(separator)) :
@@ -19,9 +22,9 @@ const list_seq = (rule, separator, trailing_separator = false) =>
 /**
  * Creates a rule to match one or more of the rules separated by a comma
  *
- * @param {_} rule
+ * @param {Rule} rule
  *
- * @return {_}
+ * @return {SeqRule}
  */
 const comma_sep1 = (rule) => list_seq(rule, ',');
 
@@ -106,7 +109,7 @@ module.exports = grammar({
         $.using_directive,
         $.import,
         $.annotation,
-        $.lang_declaration,
+        $.top_level_annotation,
         $.definition,
       ),
 
@@ -144,30 +147,45 @@ module.exports = grammar({
     import: ($) =>
       seq(
         '$import',
-        $._import_path,
-        '.',
-        'namespace',
-        '(',
-        $._namespace,
-        ')',
+        choice(
+          seq('(', $._import_path, ')'),
+          $._import_path,
+        ),
+        optional(seq('.', 'namespace', '(', $._namespace, ')')),
         ';',
       ),
+
     _namespace: ($) => alias($._string_literal, $.namespace),
 
-    lang_declaration: ($) =>
+    top_level_annotation: ($) =>
       seq(
         '$',
-        $.lang_attrs,
+        $.top_level_annotation_body,
         ';',
       ),
 
     // $Cxx.namespace("capnp::compiler");
-    lang_attrs: ($) =>
+    // $corge(string = "hello", number = 123);
+    top_level_annotation_body: ($) =>
       seq(
-        token.immediate(/[A-Za-z_][A-Za-z0-9._]*/, $._type_identifier),
+        token.immediate(alias(/[A-Za-z_][A-Za-z0-9._]*/, $._type_identifier)),
         optional(
           seq('(',
-            $._namespace,
+            choice(
+              $._namespace,
+              $.number,
+              $.float,
+              $.boolean,
+              $.multi_string_literal,
+              $.block_text,
+              $.struct_shorthand,
+              $._internal_const_identifier,
+              $.data,
+              $.const_list,
+              $.void,
+              $.embedded_file,
+              optional(list_seq(seq($._annotation_identifier, '=', $.const_value), ',')),
+            ),
             ')',
           ),
         ),
@@ -181,7 +199,7 @@ module.exports = grammar({
         optional($.unique_id),
         $.annotation_targets,
         optional(seq(':', $.field_type)),
-        optional($._annotation_call),
+        repeat($._annotation_call),
         ';',
       ),
     annotation_targets: ($) =>
@@ -203,8 +221,12 @@ module.exports = grammar({
           seq(
             $._annotation_identifier,
             optional($._generics),
+            optional(seq('(', $._param_identifier, '=', $.const_value, ')')),
             repeat(seq('.', alias($.identifier, $.attribute))),
-            optional(choice($.annotation_array, $.annotation_literal)),
+            optional(choice(
+              seq('(', optional($.annotation_array), ')'),
+              $.annotation_literal,
+            )),
           ),
         ),
       ),
@@ -212,33 +234,24 @@ module.exports = grammar({
     annotation_literal: ($) =>
       seq(
         '(',
-        $._string_literal,
+        $.const_value,
         ')',
       ),
 
     annotation_array: ($) =>
       choice(
-        seq('[', $.annotation_array, ']'),
-        seq('(', $.annotation_array, ')'),
+        seq('[', comma_sep1($.annotation_array), ']'),
+        seq('(', comma_sep1($.annotation_array), ')'),
         $._annotation_array_def,
       ),
 
     _annotation_array_def: ($) =>
-      prec.right(
+      prec.right(9,
         choice(
-          list_seq(
-            seq(
-              $._field_identifier,
-              '=',
-              $.annotation_value,
-            ),
-            ',',
-          ),
-          '()',
+          list_seq(seq($._property, '=', $.const_value), ','),
+          list_seq($.const_value, ',', true),
         ),
       ),
-
-    annotation_value: ($) => $._string_literal,
 
     definition: ($) =>
       choice(
@@ -254,7 +267,7 @@ module.exports = grammar({
         $._type_identifier,
         optional($._generics),
         optional($.unique_id),
-        optional($._annotation_call),
+        repeat($._annotation_call),
         '{',
         repeat(choice($.field, $.using_directive)),
         '}',
@@ -266,7 +279,7 @@ module.exports = grammar({
         'enum',
         $._enum_identifier,
         optional($.unique_id),
-        optional($._annotation_call),
+        repeat($._annotation_call),
         '{',
         repeat($.enum_field),
         '}',
@@ -277,7 +290,7 @@ module.exports = grammar({
       seq(
         $._enum_member,
         $.field_version,
-        optional($._annotation_call),
+        repeat($._annotation_call),
         ';',
       ),
 
@@ -300,9 +313,14 @@ module.exports = grammar({
           $._field_identifier,
           $.field_version,
           ':',
-          $.field_type,
-          optional(seq('=', $.const_value)),
-          optional($._annotation_call),
+          choice(
+            seq(
+              $.field_type,
+              optional(seq('=', $.const_value)),
+              repeat($._annotation_call),
+            ),
+            seq('import', $._import_path, repeat(seq('.', $._type_identifier))),
+          ),
           ';',
         ),
 
@@ -339,7 +357,8 @@ module.exports = grammar({
           $.field_version,
           ':',
           $.field_type,
-          optional($._annotation_call),
+          repeat($._annotation_call),
+          optional(seq('=', $.const_value)),
           ';',
         ),
 
@@ -353,8 +372,8 @@ module.exports = grammar({
         $._type_identifier,
         optional($.unique_id),
         optional($._generics),
-        optional(seq('extends', '(', $._extend_type, ')')),
-        optional($._annotation_call),
+        optional(seq('extends', '(', $._extend_type, optional($._generics), ')')),
+        repeat($._annotation_call),
         '{',
         repeat(choice($.method, $.interface, $.struct, $.enum)),
         '}',
@@ -375,7 +394,7 @@ module.exports = grammar({
         // (...) -> ();
         // (...);
         optional(seq('->', $.return_type)),
-        optional($._annotation_call),
+        repeat($._annotation_call),
         ';',
       ),
     method_parameters: ($) => seq('(', optional($.parameters), ')'),
@@ -387,7 +406,7 @@ module.exports = grammar({
         $._param_identifier,
         ':',
         $.field_type,
-        optional($._annotation_call),
+        repeat($._annotation_call),
         optional(seq('=', $.const_value)),
       ),
 
@@ -440,10 +459,12 @@ module.exports = grammar({
       seq(
         'const',
         $._const_identifier,
+        optional($.unique_id),
         ':',
         $.field_type,
         '=',
         $.const_value,
+        repeat($._annotation_call),
         ';',
       ),
 
@@ -514,21 +535,22 @@ module.exports = grammar({
     data: ($) => seq(alias('0x', $.data_hex), alias(/"([0-9A-Fa-f]{2} ?)*"/, $.data_string)),
 
     const_list: ($) =>
-      seq('[', comma_sep1($.const_value), ']'),
+      seq('[', optional(list_seq($.const_value, ',', true)), ']'),
 
     void: () => 'void',
 
     struct_shorthand: ($) =>
       seq(
         '(',
-        repeat(seq(
-          $._property,
-          '=',
-          choice(
-            $._same_scope_const_value,
-            $.const_value,
+        repeat(
+          prec.left(
+            seq(
+              $._property,
+              '=',
+              choice($._same_scope_const_value, $.const_value),
+              optional(','),
+            ),
           ),
-          optional(',')),
         ),
         ')',
       ),
@@ -551,14 +573,14 @@ module.exports = grammar({
     _string_literal: ($) => alias(/"([^"\\]|\\.)*"|'([^'\\]|\\.)*'/, $.string_literal),
 
     // multiple string literals only separated by whitespace, effectively a string concatenation
-    multi_string_literal: ($) =>
-      seq(
-        $._string_literal,
+    multi_string_literal: () =>
+      token(seq(
+        /"([^"\\]|\\.)*"|'([^'\\]|\\.)*'/,
         repeat1(seq(
           /\s+/,
-          $._string_literal,
+          /"([^"\\]|\\.)*"|'([^'\\]|\\.)*'/,
         )),
-      ),
+      )),
 
     // block texts start with a ` only, and end after a newline
     block_text: () =>
