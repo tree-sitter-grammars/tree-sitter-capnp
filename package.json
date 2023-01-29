@@ -5,7 +5,9 @@
   "main": "bindings/node",
   "keywords": [
     "parser",
-    "lexer"
+    "lexer",
+    "capnp",
+    "Cap'n Proto"
   ],
   "author": "Amaan Qureshi <amaanq12@gmail.com>",
   "license": "MIT",
@@ -32,6 +34,9 @@
       "scope": "source.capnp",
       "file-types": [
         "capnp"
+      ],
+      "highlights": [
+        "queries/highlights.scm"
       ]
     }
   ]
