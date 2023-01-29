@@ -13,18 +13,9 @@
 
 (import_path) @string
 
-; Types
+; Builtins
 
 (primitive_type) @type.builtin
-
-[
-  "annotation"
-  "enum"
-  "group"
-  "interface"
-  "struct"
-  "union"
-] @keyword
 
 ; Typedefs
 
@@ -85,6 +76,16 @@
 ] @operator
 
 ; Keywords
+
+
+[
+  "annotation"
+  "enum"
+  "group"
+  "interface"
+  "struct"
+  "union"
+] @keyword
 
 [
   "extends"

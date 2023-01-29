@@ -1,9 +1,9 @@
-name: Build and Publish
+name: Publish
 
 on:
   push:
     branches:
-      - main
+      - master
     tags:
       - "v*"
   workflow_dispatch:
