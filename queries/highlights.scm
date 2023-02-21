@@ -1,4 +1,4 @@
-; Preproc (?)
+; Preproc
 
 (unique_id) @preproc
 (top_level_annotation_body) @preproc
@@ -15,7 +15,10 @@
 
 ; Builtins
 
-(primitive_type) @type.builtin
+[
+  (primitive_type)
+  "List"
+] @type.builtin
 
 ; Typedefs
 
@@ -43,10 +46,6 @@
 (param_identifier) @parameter
 (return_identifier) @parameter
 
-; Variables
-
-(identifier) @variable
-
 ; Constants
 
 (const_identifier) @constant
@@ -59,8 +58,7 @@
 
 (enum_identifier) @type
 (extend_type) @type
-(field_type) @type
-(generic_identifier) @type
+; (generic_identifier) @type
 (type_identifier) @type
 
 ; Attributes
@@ -96,11 +94,16 @@
 
 ; Literals
 
-(string_literal) @string
-(block_text) @string
+[
+  (string)
+  (concatenated_string)
+  (block_text)
+  (namespace)
+] @string
+
+(escape_sequence) @string.escape
 
 (data_string) @string.special
-(namespace) @string.special
 
 (number) @number
 
@@ -117,6 +120,7 @@
 [
   "*"
   "$"
+  ":"
 ] @punctuation.special
 
 ["{" "}"] @punctuation.bracket
