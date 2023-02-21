@@ -551,7 +551,7 @@ struct TestUnionDefaults {
               (field_version)
               (field_type
                 (custom_type
-                  (identifier)))
+                  (type_identifier)))
               (const_value
                 (struct_shorthand
                   (property)
@@ -583,7 +583,7 @@ struct TestUnionDefaults {
               (field_version)
               (field_type
                 (custom_type
-                  (identifier)))
+                  (type_identifier)))
               (const_value
                 (struct_shorthand
                   (property)
@@ -597,7 +597,8 @@ struct TestUnionDefaults {
                     (struct_shorthand
                       (property)
                       (const_value
-                        (string_literal))))
+                        (string
+                          (string_fragment)))))
                   (property)
                   (const_value
                     (struct_shorthand
@@ -616,7 +617,7 @@ struct TestUnionDefaults {
               (field_version)
               (field_type
                 (custom_type
-                  (identifier)))
+                  (type_identifier)))
               (const_value
                 (struct_shorthand
                   (property)
@@ -627,7 +628,7 @@ struct TestUnionDefaults {
               (field_version)
               (field_type
                 (custom_type
-                  (identifier)))
+                  (type_identifier)))
               (const_value
                 (struct_shorthand
                   (property)
@@ -635,10 +636,12 @@ struct TestUnionDefaults {
                     (number))
                   (property)
                   (const_value
-                    (string_literal))
+                    (string
+                      (string_fragment)))
                   (property)
                   (const_value
-                    (string_literal)))))))))
+                    (string
+                      (string_fragment))))))))))
 
 
 
@@ -708,7 +711,7 @@ struct TestNestedTypes {
                     (field_version)
                     (field_type
                       (custom_type
-                        (identifier)))
+                        (type_identifier)))
                     (const_value
                       (const_identifier)))
                   (field
@@ -716,7 +719,7 @@ struct TestNestedTypes {
                     (field_version)
                     (field_type
                       (custom_type
-                        (identifier)))
+                        (type_identifier)))
                     (const_value
                       (const_identifier))))))
             (field
@@ -724,13 +727,13 @@ struct TestNestedTypes {
               (field_version)
               (field_type
                 (custom_type
-                  (identifier))))
+                  (type_identifier))))
             (field
               (field_identifier)
               (field_version)
               (field_type
                 (custom_type
-                  (identifier)))
+                  (type_identifier)))
               (const_value
                 (const_identifier)))
             (field
@@ -738,7 +741,7 @@ struct TestNestedTypes {
               (field_version)
               (field_type
                 (custom_type
-                  (identifier)))
+                  (type_identifier)))
               (const_value
                 (const_identifier)))))))
 
@@ -758,7 +761,7 @@ struct TestUsing {
 
 ---
 
-(message
+ (message
       (statement
         (definition
           (struct
@@ -774,7 +777,7 @@ struct TestUsing {
               (field_version)
               (field_type
                 (custom_type
-                  (identifier)))
+                  (type_identifier)))
               (const_value
                 (const_identifier)))
             (field
@@ -782,7 +785,7 @@ struct TestUsing {
               (field_version)
               (field_type
                 (custom_type
-                  (identifier)))
+                  (type_identifier)))
               (const_value
                 (const_identifier)))))))
 
@@ -1003,7 +1006,7 @@ struct TestLists {
                 (list_type
                   (field_type
                     (custom_type
-                      (identifier))))))
+                      (type_identifier))))))
             (field
               (field_identifier)
               (field_version)
@@ -1011,7 +1014,7 @@ struct TestLists {
                 (list_type
                   (field_type
                     (custom_type
-                      (identifier))))))
+                      (type_identifier))))))
             (field
               (field_identifier)
               (field_version)
@@ -1019,7 +1022,7 @@ struct TestLists {
                 (list_type
                   (field_type
                     (custom_type
-                      (identifier))))))
+                      (type_identifier))))))
             (field
               (field_identifier)
               (field_version)
@@ -1027,7 +1030,7 @@ struct TestLists {
                 (list_type
                   (field_type
                     (custom_type
-                      (identifier))))))
+                      (type_identifier))))))
             (field
               (field_identifier)
               (field_version)
@@ -1035,7 +1038,7 @@ struct TestLists {
                 (list_type
                   (field_type
                     (custom_type
-                      (identifier))))))
+                      (type_identifier))))))
             (field
               (field_identifier)
               (field_version)
@@ -1043,7 +1046,7 @@ struct TestLists {
                 (list_type
                   (field_type
                     (custom_type
-                      (identifier))))))
+                      (type_identifier))))))
             (field
               (field_identifier)
               (field_version)
@@ -1051,7 +1054,7 @@ struct TestLists {
                 (list_type
                   (field_type
                     (custom_type
-                      (identifier))))))
+                      (type_identifier))))))
             (field
               (field_identifier)
               (field_version)
@@ -1079,7 +1082,7 @@ struct TestLists {
                     (list_type
                       (field_type
                         (custom_type
-                          (identifier))))))))))))
+                          (type_identifier))))))))))))
 
 
 
@@ -1156,7 +1159,7 @@ struct TestListDefaults {
               (field_version)
               (field_type
                 (custom_type
-                  (identifier)))
+                  (type_identifier)))
               (const_value
                 (struct_shorthand
                   (property)
@@ -1258,12 +1261,14 @@ struct TestListDefaults {
                         (struct_shorthand
                           (property)
                           (const_value
-                            (string_literal))))
+                            (string
+                              (string_fragment)))))
                       (const_value
                         (struct_shorthand
                           (property)
                           (const_value
-                            (string_literal))))))
+                            (string
+                              (string_fragment)))))))
                   (property)
                   (const_value
                     (const_list
@@ -1291,19 +1296,24 @@ struct TestListDefaults {
                       (const_value
                         (const_list
                           (const_value
-                            (string_literal))
+                            (string
+                              (string_fragment)))
                           (const_value
-                            (string_literal))))
+                            (string
+                              (string_fragment)))))
                       (const_value
                         (const_list
                           (const_value
-                            (string_literal))))
+                            (string
+                              (string_fragment)))))
                       (const_value
                         (const_list
                           (const_value
-                            (string_literal))
+                            (string
+                              (string_fragment)))
                           (const_value
-                            (string_literal))))))
+                            (string
+                              (string_fragment)))))))
                   (property)
                   (const_value
                     (const_list
@@ -1485,7 +1495,7 @@ struct TestNewUnionVersion {
               (field_version)
               (field_type
                 (custom_type
-                  (identifier)))))))
+                  (type_identifier)))))))
       (statement
         (definition
           (struct
@@ -1506,7 +1516,7 @@ struct TestNewUnionVersion {
               (field_version)
               (field_type
                 (custom_type
-                  (identifier))))
+                  (type_identifier))))
             (field
               (field_identifier)
               (field_version)
@@ -1520,7 +1530,8 @@ struct TestNewUnionVersion {
               (field_type
                 (primitive_type))
               (const_value
-                (string_literal))))))
+                (string
+                  (string_fragment)))))))
       (statement
         (definition
           (struct
@@ -1671,7 +1682,7 @@ struct TestPrintInlineStructs {
                 (list_type
                   (field_type
                     (custom_type
-                      (identifier))))))
+                      (type_identifier))))))
             (field
               (nested_struct
                 (struct
@@ -1812,9 +1823,10 @@ const testImpliedFirstField :TestImpliedFirstField = (
               (field_version)
               (field_type
                 (custom_type
-                  (identifier)))
+                  (type_identifier)))
               (const_value
-                (string_literal)))
+                (string
+                  (string_fragment))))
             (field
               (field_identifier)
               (field_version)
@@ -1822,7 +1834,7 @@ const testImpliedFirstField :TestImpliedFirstField = (
                 (list_type
                   (field_type
                     (custom_type
-                      (identifier))))))
+                      (type_identifier))))))
             (field
               (group
                 (type_identifier)
@@ -1837,29 +1849,33 @@ const testImpliedFirstField :TestImpliedFirstField = (
                   (field_type
                     (primitive_type))
                   (const_value
-                    (string_literal))))))))
+                    (string
+                      (string_fragment)))))))))
       (statement
         (definition
           (const
             (const_identifier)
             (field_type
               (custom_type
-                (identifier)))
+                (type_identifier)))
             (const_value
               (struct_shorthand
                 (property)
                 (const_value
-                  (string_literal))
+                  (string
+                    (string_fragment)))
                 (property)
                 (const_value
                   (const_list
                     (const_value
-                      (string_literal))
+                      (string
+                        (string_fragment)))
                     (const_value
                       (struct_shorthand
                         (property)
                         (const_value
-                          (string_literal))
+                          (string
+                            (string_fragment)))
                         (property)
                         (const_value
                           (number))))))
@@ -1903,7 +1919,7 @@ struct TestCycleBWithCaps {
               (field_version)
               (field_type
                 (custom_type
-                  (identifier)))))))
+                  (type_identifier)))))))
       (statement
         (definition
           (struct
@@ -1915,13 +1931,13 @@ struct TestCycleBWithCaps {
                 (list_type
                   (field_type
                     (custom_type
-                      (identifier))))))
+                      (type_identifier))))))
             (field
               (field_identifier)
               (field_version)
               (field_type
                 (custom_type
-                  (identifier)))))))
+                  (type_identifier)))))))
       (statement
         (definition
           (struct
@@ -1931,7 +1947,7 @@ struct TestCycleBWithCaps {
               (field_version)
               (field_type
                 (custom_type
-                  (identifier)))))))
+                  (type_identifier)))))))
       (statement
         (definition
           (struct
@@ -1943,10 +1959,10 @@ struct TestCycleBWithCaps {
                 (list_type
                   (field_type
                     (custom_type
-                      (identifier))))))
+                      (type_identifier))))))
             (field
               (field_identifier)
               (field_version)
               (field_type
                 (custom_type
-                  (identifier))))))))
+                  (type_identifier))))))))

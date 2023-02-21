@@ -203,20 +203,22 @@ struct TestConstants {
                 (field_type
                   (primitive_type))
                 (const_value
-                  (string_literal))))
+                  (string
+                    (string_fragment)))))
             (field
               (const
                 (const_identifier)
                 (field_type
                   (primitive_type))
                 (const_value
-                  (string_literal))))
+                  (string
+                    (string_fragment)))))
             (field
               (const
                 (const_identifier)
                 (field_type
                   (custom_type
-                    (identifier)))
+                    (type_identifier)))
                 (const_value
                   (struct_shorthand
                     (property)
@@ -258,22 +260,26 @@ struct TestConstants {
                       (number))
                     (property)
                     (const_value
-                      (string_literal))
+                      (string
+                        (string_fragment)))
                     (property)
                     (const_value
-                      (string_literal))
+                      (string
+                        (string_fragment)))
                     (property)
                     (const_value
                       (struct_shorthand
                         (property)
                         (const_value
-                          (string_literal))
+                          (string
+                            (string_fragment)))
                         (property)
                         (const_value
                           (struct_shorthand
                             (property)
                             (const_value
-                              (string_literal))))))
+                              (string
+                                (string_fragment)))))))
                     (property)
                     (const_value
                       (const_identifier))
@@ -427,20 +433,26 @@ struct TestConstants {
                     (const_value
                       (const_list
                         (const_value
-                          (string_literal))
+                          (string
+                            (string_fragment)))
                         (const_value
-                          (string_literal))
+                          (string
+                            (string_fragment)))
                         (const_value
-                          (string_literal))))
+                          (string
+                            (string_fragment)))))
                     (property)
                     (const_value
                       (const_list
                         (const_value
-                          (string_literal))
+                          (string
+                            (string_fragment)))
                         (const_value
-                          (string_literal))
+                          (string
+                            (string_fragment)))
                         (const_value
-                          (string_literal))))
+                          (string
+                            (string_fragment)))))
                     (property)
                     (const_value
                       (const_list
@@ -448,17 +460,25 @@ struct TestConstants {
                           (struct_shorthand
                             (property)
                             (const_value
-                              (multi_string_literal))))
+                              (concatenated_string
+                                (string
+                                  (string_fragment))
+                                (string
+                                  (string_fragment))
+                                (string
+                                  (string_fragment))))))
                         (const_value
                           (struct_shorthand
                             (property)
                             (const_value
-                              (string_literal))))
+                              (string
+                                (string_fragment)))))
                         (const_value
                           (struct_shorthand
                             (property)
                             (const_value
-                              (string_literal))))))
+                              (string
+                                (string_fragment)))))))
                     (property)
                     (const_value
                       (const_list
@@ -474,7 +494,7 @@ struct TestConstants {
                 (const_identifier)
                 (field_type
                   (custom_type
-                    (identifier)))
+                    (type_identifier)))
                 (const_value
                   (const_identifier))))
             (field
@@ -663,11 +683,14 @@ struct TestConstants {
                 (const_value
                   (const_list
                     (const_value
-                      (string_literal))
+                      (string
+                        (string_fragment)))
                     (const_value
-                      (string_literal))
+                      (string
+                        (string_fragment)))
                     (const_value
-                      (string_literal))))))
+                      (string
+                        (string_fragment)))))))
             (field
               (const
                 (const_identifier)
@@ -678,11 +701,14 @@ struct TestConstants {
                 (const_value
                   (const_list
                     (const_value
-                      (string_literal))
+                      (string
+                        (string_fragment)))
                     (const_value
-                      (string_literal))
+                      (string
+                        (string_fragment)))
                     (const_value
-                      (string_literal))))))
+                      (string
+                        (string_fragment)))))))
             (field
               (const
                 (const_identifier)
@@ -690,24 +716,27 @@ struct TestConstants {
                   (list_type
                     (field_type
                       (custom_type
-                        (identifier)))))
+                        (type_identifier)))))
                 (const_value
                   (const_list
                     (const_value
                       (struct_shorthand
                         (property)
                         (const_value
-                          (string_literal))))
+                          (string
+                            (string_fragment)))))
                     (const_value
                       (struct_shorthand
                         (property)
                         (const_value
-                          (string_literal))))
+                          (string
+                            (string_fragment)))))
                     (const_value
                       (struct_shorthand
                         (property)
                         (const_value
-                          (string_literal))))))))
+                          (string
+                            (string_fragment)))))))))
             (field
               (const
                 (const_identifier)
@@ -715,7 +744,7 @@ struct TestConstants {
                   (list_type
                     (field_type
                       (custom_type
-                        (identifier)))))
+                        (type_identifier)))))
                 (const_value
                   (const_list
                     (const_value
@@ -758,14 +787,15 @@ const derivedConstant :TestAllTypes = (
             (field_type
               (primitive_type))
             (const_value
-              (string_literal)))))
+              (string
+                (string_fragment))))))
       (statement
         (definition
           (const
             (const_identifier)
             (field_type
               (custom_type
-                (identifier)))
+                (type_identifier)))
             (const_value
               (struct_shorthand
                 (property)
@@ -777,19 +807,20 @@ const derivedConstant :TestAllTypes = (
             (const_identifier)
             (field_type
               (custom_type
-                (identifier)))
+                (type_identifier)))
             (const_value
               (struct_shorthand
                 (property)
                 (const_value
-                  (string_literal)))))))
+                  (string
+                    (string_fragment))))))))
       (statement
         (definition
           (const
             (const_identifier)
             (field_type
               (custom_type
-                (identifier)))
+                (type_identifier)))
             (const_value
               (struct_shorthand
                 (property)
@@ -849,7 +880,7 @@ const anyPointerConstants :TestAnyPointerConstants = (
               (field_version)
               (field_type
                 (custom_type
-                  (identifier))))
+                  (type_identifier))))
             (field
               (field_identifier)
               (field_version)
@@ -860,19 +891,19 @@ const anyPointerConstants :TestAnyPointerConstants = (
               (field_version)
               (field_type
                 (custom_type
-                  (identifier)))))))
+                  (type_identifier)))))))
       (statement
         (definition
           (const
             (const_identifier)
             (field_type
               (custom_type
-                (identifier)))
+                (type_identifier)))
             (const_value
               (struct_shorthand
                 (property)
                 (const_value
-				  (type_identifier)
+                  (type_identifier)
                   (const_identifier))
                 (property)
                 (const_value
