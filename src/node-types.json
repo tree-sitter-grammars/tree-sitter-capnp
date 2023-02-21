@@ -136,6 +136,25 @@
     }
   },
   {
+    "type": "block_text",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "escape_sequence",
+          "named": true
+        },
+        {
+          "type": "string_fragment",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "boolean",
     "named": true,
     "fields": {},
@@ -149,6 +168,21 @@
         },
         {
           "type": "true",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "concatenated_string",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "string",
           "named": true
         }
       ]
@@ -264,6 +298,10 @@
           "named": true
         },
         {
+          "type": "concatenated_string",
+          "named": true
+        },
+        {
           "type": "const_identifier",
           "named": true
         },
@@ -284,15 +322,11 @@
           "named": true
         },
         {
-          "type": "multi_string_literal",
-          "named": true
-        },
-        {
           "type": "number",
           "named": true
         },
         {
-          "type": "string_literal",
+          "type": "string",
           "named": true
         },
         {
@@ -320,10 +354,6 @@
       "types": [
         {
           "type": "generics",
-          "named": true
-        },
-        {
-          "type": "identifier",
           "named": true
         },
         {
@@ -388,7 +418,7 @@
       "required": true,
       "types": [
         {
-          "type": "string_literal",
+          "type": "string",
           "named": true
         }
       ]
@@ -714,15 +744,30 @@
     }
   },
   {
-    "type": "generics",
+    "type": "generic_parameters",
     "named": true,
     "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "generic_identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "generics",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "generic_parameters",
           "named": true
         }
       ]
@@ -814,6 +859,21 @@
     }
   },
   {
+    "type": "implicit_generics",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "implicit_generic_parameters",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "import",
     "named": true,
     "fields": {},
@@ -827,6 +887,25 @@
         },
         {
           "type": "namespace",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "import_path",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "escape_sequence",
+          "named": true
+        },
+        {
+          "type": "string_fragment",
           "named": true
         }
       ]
@@ -977,6 +1056,10 @@
           "named": true
         },
         {
+          "type": "concatenated_string",
+          "named": true
+        },
+        {
           "type": "const_identifier",
           "named": true
         },
@@ -997,15 +1080,11 @@
           "named": true
         },
         {
-          "type": "multi_string_literal",
-          "named": true
-        },
-        {
           "type": "number",
           "named": true
         },
         {
-          "type": "string_literal",
+          "type": "string",
           "named": true
         },
         {
@@ -1106,10 +1185,6 @@
           "named": true
         },
         {
-          "type": "implicit_generic_parameters",
-          "named": true
-        },
-        {
           "type": "implicit_generics",
           "named": true
         },
@@ -1184,6 +1259,25 @@
       "types": [
         {
           "type": "named_return_type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "namespace",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "escape_sequence",
+          "named": true
+        },
+        {
+          "type": "string_fragment",
           "named": true
         }
       ]
@@ -1410,6 +1504,25 @@
     }
   },
   {
+    "type": "string",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "escape_sequence",
+          "named": true
+        },
+        {
+          "type": "string_fragment",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "struct",
     "named": true,
     "fields": {
@@ -1535,8 +1648,12 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
+        {
+          "type": "_type_identifier",
+          "named": true
+        },
         {
           "type": "annotation_identifier",
           "named": true
@@ -1547,6 +1664,10 @@
         },
         {
           "type": "boolean",
+          "named": true
+        },
+        {
+          "type": "concatenated_string",
           "named": true
         },
         {
@@ -1571,10 +1692,6 @@
         },
         {
           "type": "float",
-          "named": true
-        },
-        {
-          "type": "multi_string_literal",
           "named": true
         },
         {
@@ -1799,11 +1916,19 @@
     }
   },
   {
+    "type": "\"",
+    "named": false
+  },
+  {
     "type": "$",
     "named": false
   },
   {
     "type": "$import",
+    "named": false
+  },
+  {
+    "type": "'",
     "named": false
   },
   {
@@ -1915,6 +2040,14 @@
     "named": false
   },
   {
+    "type": "_type_identifier",
+    "named": true
+  },
+  {
+    "type": "`",
+    "named": false
+  },
+  {
     "type": "annotation",
     "named": false
   },
@@ -1928,10 +2061,6 @@
   },
   {
     "type": "attribute",
-    "named": true
-  },
-  {
-    "type": "block_text",
     "named": true
   },
   {
@@ -1975,6 +2104,10 @@
     "named": false
   },
   {
+    "type": "escape_sequence",
+    "named": true
+  },
+  {
     "type": "extend_type",
     "named": true
   },
@@ -2007,14 +2140,6 @@
     "named": false
   },
   {
-    "type": "identifier",
-    "named": true
-  },
-  {
-    "type": "implicit_generics",
-    "named": true
-  },
-  {
     "type": "import",
     "named": false
   },
@@ -2032,10 +2157,6 @@
   },
   {
     "type": "method_identifier",
-    "named": true
-  },
-  {
-    "type": "multi_string_literal",
     "named": true
   },
   {
@@ -2063,7 +2184,7 @@
     "named": true
   },
   {
-    "type": "string_literal",
+    "type": "string_fragment",
     "named": true
   },
   {
