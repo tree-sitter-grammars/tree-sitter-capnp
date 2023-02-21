@@ -58,7 +58,6 @@
 
 (enum_identifier) @type
 (extend_type) @type
-; (generic_identifier) @type
 (type_identifier) @type
 
 ; Attributes
