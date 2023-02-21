@@ -1,6 +1,6 @@
 {
   "name": "tree-sitter-capnp",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Cap'n Proto grammar for tree-sitter",
   "main": "bindings/node",
   "keywords": [
@@ -14,6 +14,7 @@
   "bugs": {
     "url": "https://github.com/amaanq/tree-sitter-capnp/issues"
   },
+  "homepage": "https://github.com/amaanq/tree-sitter-capnp#readme",
   "dependencies": {
     "nan": "^2.17.0"
   },
