@@ -56,23 +56,23 @@
 
 (struct
   (generics
-	(generic_parameters
-	  (generic_identifier) @definition.parameter)))
+    (generic_parameters
+      (generic_identifier) @definition.parameter)))
 
 (interface
   (generics
-	(generic_parameters
-	  (generic_identifier) @definition.parameter)))
+    (generic_parameters
+      (generic_identifier) @definition.parameter)))
 
 (method
   (implicit_generics
-	(implicit_generic_parameters
-	  (generic_identifier) @definition.parameter)))
+    (implicit_generic_parameters
+      (generic_identifier) @definition.parameter)))
 
 (method
   (generics
-	(generic_parameters
-	  (generic_identifier) @definition.parameter)))
+    (generic_parameters
+      (generic_identifier) @definition.parameter)))
 
 (annotation
   (generics
@@ -81,15 +81,10 @@
 
 (replace_using
   (generics
-	(generic_parameters
-	  (generic_identifier) @definition.type)))
+    (generic_parameters
+      (generic_identifier) @definition.type)))
 
 (return_type
   (generics
-	(generic_parameters
-	  (generic_identifier) @definition.type)))
-
-(custom_type
-  (generics
-	(generic_parameters
-	  (generic_identifier) @definition.type)))
+    (generic_parameters
+      (generic_identifier) @definition.type)))
