@@ -3,6 +3,7 @@ name = "tree-sitter-capnp"
 description = "Cap'n Proto grammar for tree-sitter"
 version = "1.2.0"
 authors = ["Amaan Qureshi <amaanq12@gmail.com>"]
+readme = "bindings/rust/README.md"
 keywords = ["incremental", "parsing", "capnp"]
 categories = ["parsing", "text-editors"]
 repository = "https://github.com/amaanq/tree-sitter-capnp"
