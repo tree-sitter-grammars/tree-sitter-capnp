@@ -1,7 +1,7 @@
 # tree-sitter-capnp
 
-This crate provides a Cap'n Proto grammar for the [tree-sitter][] parsing library. To
-use this crate, add it to the `[dependencies]` section of your `Cargo.toml`
+This crate provides a Cap'n Proto grammar for the [tree-sitter][] parsing library.
+To use this crate, add it to the `[dependencies]` section of your `Cargo.toml`
 file. (Note that you will probably also need to depend on the
 [`tree-sitter`][tree-sitter crate] crate to use the parsed result in any useful
 way.)
@@ -9,7 +9,7 @@ way.)
 ```toml
 [dependencies]
 tree-sitter = "~0.20.3"
-tree-sitter-capnp = "1.3.0"
+tree-sitter-capnp = "1.4.0"
 ```
 
 Typically, you will use the [language][language func] function to add this
@@ -17,9 +17,52 @@ grammar to a tree-sitter [Parser][], and then use the parser to parse some code:
 
 ```rust
 let code = r#"
-    fn double(x: i32) -> i32 {
-        x * 2
-    }
+@0xa73956d2621fc3ee;
+
+using Cxx = import "/capnp/c++.capnp";
+
+$Cxx.namespace("capnp::compiler");
+
+struct Token {
+  union {
+    identifier @0 :Text;
+    stringLiteral @1 :Text;
+    binaryLiteral @9 :Data;
+    integerLiteral @2 :UInt64;
+    floatLiteral @3 :Float64;
+    operator @4 :Text;
+    parenthesizedList @5 :List(List(Token));
+    bracketedList @6 :List(List(Token));
+  }
+
+  startByte @7 :UInt32;
+  endByte @8 :UInt32;
+}
+
+struct Statement {
+  tokens @0 :List(Token);
+  union {
+    line @1 :Void;
+    block @2 :List(Statement);
+  }
+
+  docComment @3 :Text;
+
+  startByte @4 :UInt32;
+  endByte @5 :UInt32;
+}
+
+struct LexedTokens {
+  # Lexer output when asked to parse tokens that don't form statements.
+
+  tokens @0 :List(Token);
+}
+
+struct LexedStatements {
+  # Lexer output when asked to parse statements.
+
+  statements @0 :List(Statement);
+}
 "#;
 let mut parser = Parser::new();
 parser.set_language(tree_sitter_capnp::language()).expect("Error loading Cap'n Proto grammar");

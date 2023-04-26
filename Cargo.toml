@@ -1,7 +1,7 @@
 [package]
 name = "tree-sitter-capnp"
 description = "Cap'n Proto grammar for tree-sitter"
-version = "1.3.0"
+version = "1.4.0"
 authors = ["Amaan Qureshi <amaanq12@gmail.com>"]
 license = "MIT"
 readme = "bindings/rust/README.md"
@@ -18,7 +18,7 @@ include = ["bindings/rust/*", "grammar.js", "queries/*", "src/*"]
 path = "bindings/rust/lib.rs"
 
 [dependencies]
-tree-sitter = "~0.20.3"
+tree-sitter = "~0.20.10"
 
 [build-dependencies]
 cc = "~1.0"
