@@ -1,15 +1,15 @@
 [package]
 name = "tree-sitter-capnp"
-description = "Cap'n Proto grammar for tree-sitter"
 version = "1.4.0"
 authors = ["Amaan Qureshi <amaanq12@gmail.com>"]
+autoexamples = false
+categories = ["parsing", "text-editors"]
+edition = "2021"
+keywords = ["incremental", "parsing", "capnp"]
 license = "MIT"
 readme = "bindings/rust/README.md"
-keywords = ["incremental", "parsing", "capnp"]
-categories = ["parsing", "text-editors"]
 repository = "https://github.com/amaanq/tree-sitter-capnp"
-edition = "2021"
-autoexamples = false
+description = "Cap'n Proto grammar for tree-sitter"
 
 build = "bindings/rust/build.rs"
 include = ["bindings/rust/*", "grammar.js", "queries/*", "src/*"]
