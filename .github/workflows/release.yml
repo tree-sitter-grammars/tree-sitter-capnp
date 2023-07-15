@@ -19,7 +19,6 @@ jobs:
         id: release
         with:
           release-type: node
-          token: ${{ secrets.GITHUB_TOKEN }}
           package-name: tree-sitter-capnp
 
       - uses: actions/checkout@v3
