@@ -1,0 +1,11 @@
+prefix=@PREFIX@
+libdir=@LIBDIR@
+includedir=@INCLUDEDIR@
+additionallibs=@ADDITIONALLIBS@
+
+Name: tree-sitter-@PARSERNAME@
+Description: @PARSERNAME@ grammar for tree-sitter
+URL: @PARSERURL@
+Version: @VERSION@
+Libs: -L${libdir} ${additionallibs} -ltree-sitter-@PARSERNAME@
+Cflags: -I${includedir}

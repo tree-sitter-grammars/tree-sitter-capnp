@@ -38,6 +38,10 @@
       ],
       "highlights": [
         "queries/highlights.scm"
+      ],
+      "bindings": [
+        "go",
+        "swift"
       ]
     }
   ]

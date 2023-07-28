@@ -15,15 +15,18 @@ let package = Package(
                     "binding.gyp",
                     "bindings",
                     "Cargo.toml",
+                    "corpus",
                     "examples",
                     "test",
                     "grammar.js",
                     "LICENSE",
+                    "Makefile",
                     "package.json",
                     "README.md",
                     "script",
                     "src/grammar.json",
                     "src/node-types.json",
+                    "*.wasm",
                 ],
                 sources: [
                     "src/parser.c",
@@ -35,3 +38,4 @@ let package = Package(
                 cSettings: [.headerSearchPath("src")])
     ]
 )
+
