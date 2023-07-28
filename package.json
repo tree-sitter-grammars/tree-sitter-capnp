@@ -38,7 +38,16 @@
       ],
       "highlights": [
         "queries/highlights.scm"
-      ]
+      ],
+      "bindings": {
+        "c": true,
+        "go": true,
+        "node": true,
+        "python": true,
+        "rust": true,
+        "swift": true,
+        "zig": true
+      }
     }
   ]
 }
