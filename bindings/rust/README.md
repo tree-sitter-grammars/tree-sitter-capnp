@@ -9,7 +9,7 @@ way.)
 ```toml
 [dependencies]
 tree-sitter = "~0.20.3"
-tree-sitter-capnp = "1.5.0"
+tree-sitter-capnp = "1.6.0"
 ```
 
 Typically, you will use the [language][language func] function to add this

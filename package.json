@@ -1,6 +1,6 @@
 {
   "name": "tree-sitter-capnp",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "description": "Cap'n Proto grammar for tree-sitter",
   "main": "bindings/node",
   "keywords": [

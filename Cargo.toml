@@ -1,6 +1,6 @@
 [package]
 name = "tree-sitter-capnp"
-version = "1.5.0"
+version = "1.6.0"
 authors = ["Amaan Qureshi <amaanq12@gmail.com>"]
 autoexamples = false
 categories = ["parsing", "text-editors"]
