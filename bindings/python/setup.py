@@ -1,5 +1,9 @@
-from setuptools import setup, find_packages
+"""Capnp grammar for tree-sitter"""
+
+__version__ = "0.0.1"
+
 from cffi import FFI
+from setuptools import find_packages, setup
 
 ffibuilder = FFI()
 
@@ -22,16 +26,17 @@ ffibuilder.cdef("""
 """)
 
 if __name__ == "__main__":
-    ffibuilder.compile(verbose=True)
+    file = ffibuilder.compile(verbose=True)
     setup(
-        name='tree-sitter-capnp',
-        version='0.0.1',
-        description='Capnp grammar for tree-sitter',
-        url='http://github.com/tree-sitter/tree-sitter-capnp',
-        license='MIT',
+        name="tree-sitter-capnp",
+        version=__version__,
+        description="Capnp grammar for tree-sitter",
+        url="http://github.com/tree-sitter/tree-sitter-capnp",
+        license="MIT",
         packages=find_packages(),
         package_data={
-            'tree_sitter_capnp': ['_tree_sitter_capnp.cpython-311-darwin.so'],
+            "tree_sitter_capnp": [file.split("/")[-1]],
         },
-        zip_safe=False
+        zip_safe=False,
+        setup_requires=["cffi"]
     )

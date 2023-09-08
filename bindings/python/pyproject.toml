@@ -1,0 +1,14 @@
+[build-system]
+requires = ["setuptools", "cffi"]
+
+[project]
+name = "tree-sitter-capnp"
+version = "0.0.1"
+description = "Capnp grammar for Tree-Sitter"
+requires-python = ">=3.6"
+keywords = ["parsing", "incremental", "capnp"]
+classifiers = [
+	"License :: OSI Approved :: MIT License",
+	"Topic :: Text Processing :: Linguistic",
+]
+dependencies = ["cffi"]
